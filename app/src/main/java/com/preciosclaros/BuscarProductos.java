@@ -68,7 +68,7 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
     public SharedPreferences sharedPreferences;
     ApiPrecios service;
     public Call<Response> requestCatalog;
-    public Call<ArrayList<Producto>> requestProductos;
+    public Call<ProductosApi> requestProductos;
     SharedPreferences.Editor editor;
     @BindView(R.id.ReciclerProductos)
     RecyclerView recyclerView;
@@ -178,7 +178,7 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
         Retrofit retrofit = new Retrofit.Builder()
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
-                .baseUrl("http://159.203.82.82/api/")
+                .baseUrl("https://d735s5r2zljbo.cloudfront.net/prod/")
                 .build();
         service = retrofit.create(ApiPrecios.class);
 
@@ -187,14 +187,14 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
         if (sharedPreferences.contains("Lat") && !sharedPreferences.getString("Lat","").equalsIgnoreCase("vacio") ) {
             lati = Double.parseDouble(sharedPreferences.getString("Lat", ""));
             lng = Double.parseDouble(sharedPreferences.getString("Longitude", ""));
-            requestProductos = service.BuscarProductos(nombre, lati, lng);
-            requestProductos.enqueue(new Callback<ArrayList<Producto>>() {
+            requestProductos = service.BuscarProductosC(nombre,lati,lng,10);
+            requestProductos.enqueue(new Callback<ProductosApi>() {
                 @Override
-                public void onResponse(Call<ArrayList<Producto>> call, retrofit2.Response<ArrayList<Producto>> response) {
+                public void onResponse(Call<ProductosApi> call, retrofit2.Response<ProductosApi> response) {
                     if (response.isSuccessful()) {
                         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                        ArrayList<Producto> received = response.body();
-                        if(response.body().isEmpty())
+                        ProductosApi received = response.body();
+                        if(response.body().getProductos().isEmpty())
                         {
                             findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
                             TextView msg = (TextView) findViewById(R.id.textMensajeErrorBuscar);
@@ -207,7 +207,7 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
                         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
                                 getApplicationContext()
                         ));
-                        ProductosAdapter adapter = new ProductosAdapter(received);
+                        ProductosAdapter adapter = new ProductosAdapter(received.getProductos());
                         // lista =(ListView) findViewById(R.id.listaProductoSucursales);
                         recyclerView.setAdapter(adapter);
                         String TAG = null;
@@ -227,7 +227,7 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
                 }
 
                 @Override
-                public void onFailure(Call<ArrayList<Producto>> call, Throwable t) {
+                public void onFailure(Call<ProductosApi> call, Throwable t) {
                     String TAG = null;
                     Log.e(TAG, "Error:" + t.getCause());
                     findViewById(R.id.loadingPanel).setVisibility(View.GONE);

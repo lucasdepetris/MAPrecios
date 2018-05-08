@@ -21,23 +21,23 @@ public class Response {
     }
 
     private int status;
-    private  Sucursales mejorPrecio;
+    //private  Sucursales mejorPrecio;
 
-    public Sucursales getMejorPrecio() {
+   /* public Sucursales getMejorPrecio() {
         return mejorPrecio;
-    }
+    }*/
 
-    public void setMejorPrecio(Sucursales mejorPrecio) {
+   /* public void setMejorPrecio(Sucursales mejorPrecio) {
         this.mejorPrecio = mejorPrecio;
-    }
+    }*/
 
     Producto producto;
     ArrayList<Sucursales> sucursales = new ArrayList<Sucursales>();
-    public Response(Producto producto, ArrayList<Sucursales> sucursales , int status,Sucursales mejorPrecio) {
+    public Response(Producto producto, ArrayList<Sucursales> sucursales , int status) {
         this.producto = producto;
         this.sucursales = sucursales;
         this.status = status;
-        this.mejorPrecio = mejorPrecio;
+        //this.mejorPrecio = mejorPrecio;
     }
 
     public Producto getProducto() {

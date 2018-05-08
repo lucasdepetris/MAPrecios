@@ -227,7 +227,7 @@ public class VerProductoPorId extends AppCompatActivity {
                 public void onResponse(Call<com.preciosclaros.modelo.Response> call, retrofit2.Response<Response> response) {
                     if (response.isSuccessful()) {
                         Producto received = response.body().getProducto();
-                        if (response.body().getMejorPrecio() == null) {
+                        if (response.body() == null) {
 
                             if(actividad.equalsIgnoreCase("barcode"))
                             {
@@ -262,10 +262,10 @@ public class VerProductoPorId extends AppCompatActivity {
                                     .placeholder(R.drawable.image_placeholder)
                                     .error(R.drawable.no_image_aivalable)
                                     .into(imgProducto);
-                            precioProducto.setText("$" + response.body().getMejorPrecio().getPreciosProducto().getPrecioLista());
+                            precioProducto.setText("$" + response.body().getProductos().get(0).getPreciosProducto().getPrecioLista());
                             nombreProducto.setText(received.getNombre());
                             ArrayList<Sucursales> sucursales = response.body().getProductos();
-                            mejorSucursal = response.body().getMejorPrecio();
+                            //mejorSucursal = response.body().getMejorPrecio();
                             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
                             recyclerView.setLayoutManager(linearLayoutManager);
                             recyclerView.addItemDecoration(new SimpleDividerItemDecoration(

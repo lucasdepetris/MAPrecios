@@ -4,6 +4,7 @@ import com.preciosclaros.modelo.Lista;
 import com.preciosclaros.modelo.Listas;
 import com.preciosclaros.modelo.Producto;
 import com.preciosclaros.modelo.Response;
+import com.preciosclaros.modelo.ProductosApi;
 import com.preciosclaros.modelo.Usuario;
 
 import java.util.ArrayList;
@@ -22,11 +23,11 @@ import retrofit2.http.Query;
 
 public interface ApiPrecios {
     @Headers("Content-Type: application/json")
-    //API DE ELLOS
+    //API DE ELLO
     @GET("producto")
     Call<Response>getProductoC(@Query ("id_producto") String id , @Query("lat") double latitud, @Query("lng") double longitud, @Query("limit") int limit);
     @GET("productos")
-    Call<ArrayList<Producto>> BuscarProductosC(@Query ("string") String buscar , @Query("lat") double latitud, @Query("lng") double longitud, @Query("limit") int limit);
+    Call<ProductosApi> BuscarProductosC(@Query ("string") String buscar , @Query("lat") double latitud, @Query("lng") double longitud, @Query("limit") int limit);
 
     //REQUEST API NUESTRA MAPRECIOS
     @GET("Productos/ObtenerProductoPorId")
