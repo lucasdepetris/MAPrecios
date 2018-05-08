@@ -63,6 +63,7 @@ public class SucursalesAdapter extends RecyclerView.Adapter<SucursalesAdapter.Vi
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         final Sucursales sucursal = this.sucursales.get(position);
+        /*
         int cid = Integer.parseInt(sucursal.getComercioId());
         int cidMejor = Integer.parseInt(MejorSucursal.getComercioId());
         int id = Integer.parseInt(sucursal.getId());
@@ -72,6 +73,7 @@ public class SucursalesAdapter extends RecyclerView.Adapter<SucursalesAdapter.Vi
             holder.estrella.setVisibility(View.VISIBLE);
         }
         else{holder.estrella.setVisibility(View.GONE);}
+        */
         holder.distancia.setText(sucursal.getDistanciaDescripcion());
         holder.nombreComercio.setText(sucursal.getBanderaDescripcion());
         holder.direccion.setText(sucursal.getDireccion());

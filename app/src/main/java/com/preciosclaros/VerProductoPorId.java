@@ -212,7 +212,7 @@ public class VerProductoPorId extends AppCompatActivity {
         Retrofit retrofit = new Retrofit.Builder()
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
-                .baseUrl("http://159.203.82.82/api/")
+                .baseUrl("https://d735s5r2zljbo.cloudfront.net/prod/")
                 .build();
         service = retrofit.create(ApiPrecios.class);
 
@@ -221,7 +221,7 @@ public class VerProductoPorId extends AppCompatActivity {
         if(sharedPreferences.contains("Lat")){
             lati = Double.parseDouble(sharedPreferences.getString("Lat",""));
             lng = Double.parseDouble(sharedPreferences.getString("Longitude",""));
-            requestCatalog = service.getProducto(codigo, lati, lng);
+            requestCatalog = service.getProductoC(codigo, lati, lng,10);
             requestCatalog.enqueue(new Callback<com.preciosclaros.modelo.Response>() {
                 @Override
                 public void onResponse(Call<com.preciosclaros.modelo.Response> call, retrofit2.Response<Response> response) {
@@ -322,7 +322,7 @@ public class VerProductoPorId extends AppCompatActivity {
         Retrofit retrofit = new Retrofit.Builder()
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
-                .baseUrl("http://159.203.82.82/api/")
+                .baseUrl("https://d735s5r2zljbo.cloudfront.net/prod/")
                 .build();
         service = retrofit.create(ApiPrecios.class);
         sharedPreferences = getApplicationContext().getSharedPreferences("Reg", Context.MODE_PRIVATE);
