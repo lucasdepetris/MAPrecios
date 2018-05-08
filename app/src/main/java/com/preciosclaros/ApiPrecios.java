@@ -25,6 +25,8 @@ public interface ApiPrecios {
     //API DE ELLOS
     @GET("producto")
     Call<Response>getProductoC(@Query ("id_producto") String id , @Query("lat") double latitud, @Query("lng") double longitud, @Query("limit") int limit);
+    @GET("productos")
+    Call<ArrayList<Producto>> BuscarProductosC(@Query ("string") String buscar , @Query("lat") double latitud, @Query("lng") double longitud, @Query("limit") int limit);
 
     //REQUEST API NUESTRA MAPRECIOS
     @GET("Productos/ObtenerProductoPorId")
