@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">MAPrecios</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="Cant">Cantidad</string>
+    <string name="Precio">Precio</string>
+    <string name="Gastado">Gastado</string>
+    <string name="Eliminar">¿Estas seguro que deseas eliminarlo?</string>
+    <string name="NotFound">Lo sentimos, no se han encontrado resultados en los comercios cercanos.</string>
+    <string name="Agregado">Se ha agregado con exito.</string>
+    <string name="AgregarLista">Agregar Lista</string>
+    <string name="MejorPrecioTitle">Mejor Precio:</string>
+    <string name="Agregar">Agregar</string>
+    <string name="Cancelar">Cancelar</string>
+    <string name="Modificar">Modificar</string>
+    <string name="VerLista">Ver Lista</string>
+    <string name="SeguirBuscando">Seguir Buscando</string>
+    <string name="original">Original</string>
+    <string name="cercana">Cercana</string>
+    <string name="economica">Economica</string>
+    <string name="listaVacia">Su lista esta vacia</string>
+    <string name="Reintentar">Reintentar</string>
+    <string name="noConexion">Lo sentimos, no se ha podido establecer una conexión con nuestro servidor</string>
+    <string name="problemaConServidor">Lo sentimos, ha ocurrido un problema con el servidor</string>
+    <string name="productoSinPrecio">Lo sentimos, el producto se encuentra sin precio</string>
+    <string name="sinCoincidencias">No hubo coincidencias con el producto o categoria buscado.</string>
+    <string name="nombre">Nombre</string>
+    <string name="descripcion">Descripcion</string>
+    <string name="cantidad">Cantidad</string>
+    <string name="misListas">Mis Listas</string>
+    <string name="escanear">Escanear</string>
+    <string name="buscar">Buscar</string>
+    <string name="sinUbicacion">No se ha podido obtener su ubicación, intente nuevamente eligiendo una ubicación</string>
+    <string-array name="media_names">
+        <item>Big Buck Bunny</item>
+        <item>Elephants Dream</item>
+        <item>Sintel</item>
+        <item>Tears of Steel</item>
+    </string-array>
+</resources>

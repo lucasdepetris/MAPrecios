@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <RelativeLayout
+
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp">
+
+        <ImageView
+            android:id="@+id/imgProductoMiLista"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@id/imgProductoMiLista"
+            android:layout_toRightOf="@+id/imgProductoMiLista"
+            android:textStyle="bold"
+            android:textColor="@color/md_black_1000"
+            android:id="@+id/descripcionProductoMiLista"
+            android:text=""
+            android:maxWidth="120dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@id/descripcionProductoMiLista"
+            android:layout_toRightOf="@+id/descripcionProductoMiLista"
+            android:layout_gravity="end"
+            android:textAlignment="textEnd"
+            android:textColor="@color/md_black_1000"
+            android:id="@+id/precioProductoMiLista"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="@color/md_black_1000"
+            android:clickable="true"
+            android:id="@+id/cantidadProductoMiLista"
+            android:maxWidth="200dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+</LinearLayout>

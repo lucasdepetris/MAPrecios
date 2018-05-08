@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:weightSum="10">
+    <RelativeLayout
+        android:visibility="gone"
+        android:gravity="center_horizontal|center_vertical"
+        android:background="@color/white"
+        android:id="@+id/msgErrorListaOptima"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:id="@+id/msgErrorCarrito"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginBottom="10dp"
+                android:id="@+id/imgMsgError"
+                android:src="@drawable/carrito_triste"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/textMensajeErrorLista"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@+id/msgErrorCarrito"
+            android:textColor="@color/colorPrimaryDark"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:paddingTop="10dp"
+            android:textAlignment="center"
+            android:text="@string/problemaConServidor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:visibility="visible"
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:visibility="gone"
+        android:gravity="center_horizontal|center_vertical"
+        android:id="@+id/NoConectoServidor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:id="@+id/imgNoConecto"
+            android:src="@drawable/carrito_triste"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="@color/md_black_1000"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:textAlignment="center"
+            android:text="@string/noConexion"
+            android:layout_below="@+id/imgNoConecto"
+            android:id="@+id/msgNoConecto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/msgNoConecto"
+            android:id="@+id/btnReintentarBuscar"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:background="@drawable/my_button_bg"
+            android:text="@string/Reintentar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:gravity="center_horizontal|center_vertical"
+        android:visibility="gone"
+        android:id="@+id/listaVacia"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textAlignment="center"
+            android:id="@+id/msgListaVacia"
+            android:textColor="@color/md_black_1000"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:text="@string/listaVacia"
+            android:gravity="center_horizontal|center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_weight="2.5"
+        android:id="@+id/cabeceraLista"
+        android:gravity="center_vertical"
+        android:background="@drawable/fondo_lista_cabecera"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <ImageView
+            android:id="@+id/imgCabeceraLista"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/blanca"
+            android:layout_width="120dp"
+            android:layout_height="80dp" />
+        <TextView
+            android:layout_toRightOf="@+id/imgCabeceraLista"
+            android:shadowRadius="24"
+            android:shadowColor="#000000"
+            android:textSize="25dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/white"
+            android:id="@+id/VerNombreLista"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:maxWidth="162dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/VerNombreLista"
+            android:layout_toRightOf="@+id/imgCabeceraLista"
+            android:shadowColor="#000000"
+            android:shadowRadius="24"
+            android:textSize="20dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/white"
+            android:id="@+id/VerDescripcionLista"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/VerDescripcionLista"
+            android:layout_toRightOf="@+id/imgCabeceraLista"
+            android:shadowColor="#000000"
+            android:shadowRadius="24"
+            android:textSize="20dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/white"
+            android:id="@+id/TotalDeListaDeclarado"
+            android:text="$500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textAlignment="center"
+            android:gravity="center_vertical"
+            android:layout_below="@+id/VerNombreLista"
+            android:visibility="gone"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_alignParentRight="true"
+            android:drawableTop="@drawable/ahorro_chanchito"
+            android:text=""
+            android:textColor="@color/white"
+            android:shadowColor="#000000"
+            android:shadowRadius="24"
+            android:textSize="20sp"
+            android:id="@+id/ahorro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_centerVertical="true"
+            android:textAlignment="center"
+            android:gravity="center_vertical"
+            android:layout_below="@+id/VerNombreLista"
+            android:visibility="gone"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_alignParentRight="true"
+            android:drawableTop="@drawable/noahorro_chanchito"
+            android:text=""
+            android:textColor="@color/white"
+            android:shadowColor="#000000"
+            android:shadowRadius="24"
+            android:textSize="20sp"
+            android:id="@+id/perdida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/botonesOptimizar"
+        android:layout_weight="1"
+        android:weightSum="3"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <Button
+            android:background="@color/gray"
+            android:id="@+id/BtnListaOriginal"
+            android:layout_weight="1"
+            android:text="@string/original"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:background="@color/gray"
+            android:id="@+id/BtnListaCercana"
+            android:layout_weight="1"
+            android:text="@string/cercana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:background="@color/gray"
+            android:id="@+id/BtnListaBarata"
+            android:layout_weight="1"
+            android:text="@string/economica"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_weight="6.5"
+        android:id="@+id/ReciclerContenidoLista"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

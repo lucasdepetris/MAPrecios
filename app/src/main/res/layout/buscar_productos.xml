@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:background="@color/primary_dark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <SearchView
+            android:inputType="text"
+            android:id="@+id/searchProducto"
+            android:layout_margin="20dp"
+            android:queryHint="Escribe Nombre o Categoria"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </SearchView>
+    </LinearLayout>
+    <RelativeLayout
+        android:background="@drawable/fondo_no_result"
+        android:id="@+id/iconBuscar"
+        android:visibility="visible"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_marginTop="40dp"
+            android:src="@drawable/lupa_fondo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:background="@color/white"
+        android:visibility="gone"
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" >
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:visibility="gone"
+        android:gravity="center_horizontal"
+        android:background="@drawable/fondo_no_result"
+        android:id="@+id/msgErrorUbicacion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:id="@+id/msgErrorCarrito"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imgMsgError"
+                android:src="@drawable/mapa_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/textMensajeErrorBuscar"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@+id/msgErrorCarrito"
+            android:textColor="@color/colorPrimaryDark"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:paddingTop="10dp"
+            android:textAlignment="center"
+            android:text="@string/sinUbicacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+   <android.support.v7.widget.RecyclerView
+       android:background="@color/white"
+       android:clickable="true"
+       android:id="@+id/ReciclerProductos"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+   </android.support.v7.widget.RecyclerView>
+</LinearLayout>

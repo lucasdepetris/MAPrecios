@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="20dp"
+    android:layout_marginTop="10dp"
+    android:background="@color/white">
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:id="@+id/imgLista"
+        android:src="@drawable/lista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_toLeftOf="@+id/editarLista"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/md_black_1000"
+        android:maxWidth="130dp"
+        android:layout_toRightOf="@id/imgLista"
+        android:textSize="20dp"
+        android:id="@+id/NombreLista"
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_toLeftOf="@+id/editarLista"
+        android:textColor="@color/md_black_1000"
+        android:maxWidth="135dp"
+        android:layout_below="@id/NombreLista"
+        android:layout_toRightOf="@id/imgLista"
+        android:textSize="15dp"
+        android:id="@+id/DescripcionLista"
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:id="@+id/editarLista"
+        android:src="@drawable/lapiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/borrarLista"
+        android:layout_toLeftOf="@+id/borrarLista"
+        android:layout_toStartOf="@+id/borrarLista"
+        android:layout_marginEnd="15dp"
+        android:layout_alignParentTop="true" />
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/imgLista"
+        android:layout_toStartOf="@+id/imgLista"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:id="@+id/borrarLista"
+        android:src="@drawable/cesto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

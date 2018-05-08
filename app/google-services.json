@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "943405045845",
+    "project_id": "preciosclaros-33c20"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943405045845:android:cf4e6dda9ecb1cb8",
+        "android_client_info": {
+          "package_name": "com.preciosclaros"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "943405045845-1sivau6lgu96dfdoe2mnh7mahb5aabvi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.preciosclaros",
+            "certificate_hash": "b6bdc0b092d8165a984450d07c84b5a33f7f8c34"
+          }
+        },
+        {
+          "client_id": "943405045845-v635pt72u0ukbrjaf8r8vqkkc2an963q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqvv5x3d4L2fDlp8wuK3SFqCg3zNLzuLI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
