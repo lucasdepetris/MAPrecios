@@ -66,9 +66,10 @@ public class HomeActivity extends AppCompatActivity
     @OnClick({R.id.listas ,R.id.escanear, R.id.buscar}) public void elejirOpcion(Button btn){
         switch (btn.getId()){
             case R.id.listas:
+                /*
                 Intent intent = new Intent(HomeActivity.this,MisListas.class);
                 intent.setFlags(intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
+                startActivity(intent);*/
                 break;
             case R.id.escanear:
                 sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);

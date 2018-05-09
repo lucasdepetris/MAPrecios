@@ -111,6 +111,7 @@ public class VerProductoPorId extends AppCompatActivity {
     List<String> AirNum = new ArrayList<String>();
     @BindView(R.id.imgErrorVerProductoPorId)ImageView imgError;
     @BindView(R.id.textMensajeErrorBuscar) TextView msgError;
+    /*
     @OnClick(R.id.agregarMejorPrecio)public void agregarProducto(){
         if(cargoSelect)
         {
@@ -119,7 +120,7 @@ public class VerProductoPorId extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"No se ha podido obtener sus listas",Toast.LENGTH_LONG).show();
             cargarSelect();
         }
-    }
+    }*/
     @OnClick(R.id.btnReintentarBuscar)public void buscarDeNuevo(){
         findViewById(R.id.msgErrorUbicacion).setVisibility(View.GONE);
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
@@ -134,7 +135,7 @@ public class VerProductoPorId extends AppCompatActivity {
         actividad = intent.getStringExtra("actividad");
         idProducto = intent.getStringExtra("idProducto");
         buscarProducto(intent.getStringExtra("idProducto"));
-        cargarSelect();
+        //cargarSelect();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

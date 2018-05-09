@@ -84,6 +84,7 @@ public class SucursalesAdapter extends RecyclerView.Adapter<SucursalesAdapter.Vi
                 .placeholder(R.drawable.image_placeholder)
                 .error(R.drawable.no_image_aivalable)
                 .into(holder.imgComercio);
+        /*
         holder.agregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +96,7 @@ public class SucursalesAdapter extends RecyclerView.Adapter<SucursalesAdapter.Vi
 
             }
         });
-
+        */
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
 

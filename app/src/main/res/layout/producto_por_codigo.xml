@@ -81,6 +81,7 @@
             android:id="@+id/MejorPrecio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
         <ImageButton
             android:src="@drawable/btn_agregar_producto"
             android:background="@android:color/transparent"
@@ -94,6 +95,7 @@
             android:layout_marginBottom="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
         <ImageButton
             android:src="@drawable/estrella"
             android:background="@android:color/transparent"
