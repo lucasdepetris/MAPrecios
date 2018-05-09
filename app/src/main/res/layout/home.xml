@@ -43,31 +43,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Button
-
-                android:drawableLeft="@drawable/blanca"
-                android:layout_weight="0.7"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="40dp"
-                android:background="@color/colorPrimaryDark"
-                android:id="@+id/listas"
-                android:text="@string/misListas"
-                android:textColor="@color/white"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:weightSum="1"
-            android:gravity="center"
-            android:padding="15dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
 
             <Button
                 android:drawableLeft="@drawable/icon_scan"
@@ -85,6 +60,7 @@
 
 
         </LinearLayout>
+
         <LinearLayout
             android:weightSum="1"
             android:gravity="center"

@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.os.PersistableBundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -63,14 +64,8 @@ public class HomeActivity extends AppCompatActivity
     GoogleApiClient mGoogleApiClient;
     GoogleApiClient miGoogleApiClient;
     private  boolean mapaShow;
-    @OnClick({R.id.listas ,R.id.escanear, R.id.buscar}) public void elejirOpcion(Button btn){
+    @OnClick({R.id.escanear, R.id.buscar}) public void elejirOpcion(Button btn){
         switch (btn.getId()){
-            case R.id.listas:
-                /*
-                Intent intent = new Intent(HomeActivity.this,MisListas.class);
-                intent.setFlags(intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);*/
-                break;
             case R.id.escanear:
                 sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
                 if(!sharedPreferences.contains("Lat"))
@@ -110,12 +105,9 @@ public class HomeActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        us = navigationView.getMenu().findItem(R.id.nav_user);
         ubicacion = navigationView.getMenu().findItem(R.id.ubicacionActual);
         ubicacion.setCheckable(false);
         sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
-        us.setTitle(sharedPreferences.getString("mail",""));
-        us.setCheckable(false);
         if(sharedPreferences.contains("ubicacion"))
         {
             ubicacion.setTitle(sharedPreferences.getString("ubicacion",""));
@@ -174,8 +166,6 @@ public class HomeActivity extends AppCompatActivity
         Fragment fragment = null;
         //initializing the fragment object which is selected
         switch (itemId) {
-            case R.id.nav_user:
-                break;
             case R.id.nav_close:
                 //fragment = new Menu3();
                 close = true;
@@ -184,16 +174,9 @@ public class HomeActivity extends AppCompatActivity
                 editor = sharedPreferences.edit();
                 editor.clear();
                 editor.commit();
-                Auth.GoogleSignInApi.revokeAccess(miGoogleApiClient).setResultCallback(
-                        new ResultCallback<Status>() {
-                            @Override
-                            public void onResult(Status status) {
-                                // ...
-                                Toast.makeText(getApplicationContext(),"Logged Out",Toast.LENGTH_SHORT).show();
-                                HomeActivity.super.onBackPressed();
-                            }
-                        });
-                break;
+                //HomeActivity.super.onBackPressed();
+                finish();
+
         }
         //replacing the fragment
         if (fragment != null) {
@@ -206,6 +189,7 @@ public class HomeActivity extends AppCompatActivity
     }
     @Override
     protected void onStart() {
+        /*
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -213,6 +197,7 @@ public class HomeActivity extends AppCompatActivity
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
         miGoogleApiClient.connect();
+        */
         super.onStart();
     }
     @Override

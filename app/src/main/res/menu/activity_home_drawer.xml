@@ -2,10 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:id="@+id/menu_drawer" android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_user"
-            android:icon="@drawable/ic_person_black_48dp"
-            android:title="Usuario" />
+
         <item
             android:icon="@drawable/ic_room_white_48dp"
             android:id="@+id/ubicacionActual"
