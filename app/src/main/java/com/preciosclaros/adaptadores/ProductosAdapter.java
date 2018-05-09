@@ -9,12 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.preciosclaros.BuscarProductos;
-import com.preciosclaros.HomeActivity;
-import com.preciosclaros.MisListas;
-import com.preciosclaros.MostrarLista;
 import com.preciosclaros.VerProductoPorId;
 import com.preciosclaros.modelo.Producto;
 import com.preciosclaros.R;
