@@ -1,10 +1,13 @@
 package com.preciosclaros;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +18,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -187,11 +191,22 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
                         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
                                 getApplicationContext()
                         ));
-                        ProductosAdapter adapter = new ProductosAdapter(received.getProductos());
-                        // lista =(ListView) findViewById(R.id.listaProductoSucursales);
-                        recyclerView.setAdapter(adapter);
-                        String TAG = null;
-                        Log.i(TAG, "Artículo descargado: ");
+                        if(received.getProductos() != null){
+                            ProductosAdapter adapter = new ProductosAdapter(received.getProductos());
+                            // lista =(ListView) findViewById(R.id.listaProductoSucursales);
+                            recyclerView.setAdapter(adapter);
+                            String TAG = null;
+                            Log.i(TAG, "Artículo descargado: ");
+                        }else{
+                            int code = response.code();
+                            String c = String.valueOf(code);
+                            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                            findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
+                            TextView msg = (TextView) findViewById(R.id.textMensajeErrorBuscar);
+                            ImageView img = (ImageView) findViewById(R.id.imgMsgError);
+                            img.setImageResource(R.drawable.carrito_triste);
+                            msg.setText(R.string.problemaConServidor);
+                        }
                     } else {
                         int code = response.code();
                         String c = String.valueOf(code);
@@ -226,7 +241,7 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
     }
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        Toast.makeText(getApplicationContext(),"Falla conexion: "+connectionResult.getErrorMessage(),Toast.LENGTH_LONG);
     }
 
 }

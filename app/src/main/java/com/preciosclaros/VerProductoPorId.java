@@ -227,10 +227,19 @@ public class VerProductoPorId extends AppCompatActivity {
                             recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
                                     getApplicationContext()
                             ));
-                            SucursalesAdapter adapter = new SucursalesAdapter(sucursales, context,mejorSucursal);
-                            // lista =(ListView) findViewById(R.id.listaProductoSucursales);
-                            recyclerView.setAdapter(adapter);
-                            Log.i(TAG, "Artículo descargado: ");
+                            if(sucursales != null) {
+                                SucursalesAdapter adapter = new SucursalesAdapter(sucursales, context, mejorSucursal);
+                                // lista =(ListView) findViewById(R.id.listaProductoSucursales);
+                                recyclerView.setAdapter(adapter);
+                                Log.i(TAG, "Artículo descargado: ");
+                            }else{
+                                menuOcultar = true;
+                                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                                imgError.setImageResource(R.drawable.carrito_triste);
+                                msgError.setText(R.string.problemaConServidor);
+                                findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
+                                //Toast.makeText(getApplicationContext(),"Hubo un problema de conexion al servidor",Toast.LENGTH_LONG).show();
+                            }
                         }
                     } else {
                         menuOcultar = true;
