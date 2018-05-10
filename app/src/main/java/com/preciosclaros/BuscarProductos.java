@@ -191,7 +191,7 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
                         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
                                 getApplicationContext()
                         ));
-                        if(received.getProductos() != null){
+                        if(!received.getProductos().isEmpty()){
                             ProductosAdapter adapter = new ProductosAdapter(received.getProductos());
                             // lista =(ListView) findViewById(R.id.listaProductoSucursales);
                             recyclerView.setAdapter(adapter);
