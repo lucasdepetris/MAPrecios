@@ -171,7 +171,7 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
         if (sharedPreferences.contains("Lat") && !sharedPreferences.getString("Lat","").equalsIgnoreCase("vacio") ) {
             lati = Double.parseDouble(sharedPreferences.getString("Lat", ""));
             lng = Double.parseDouble(sharedPreferences.getString("Longitude", ""));
-            requestProductos = service.BuscarProductosC(nombre,lati,lng,10);
+            requestProductos = service.BuscarProductosC(nombre,lati,lng,100);
             requestProductos.enqueue(new Callback<ProductosApi>() {
                 @Override
                 public void onResponse(Call<ProductosApi> call, retrofit2.Response<ProductosApi> response) {

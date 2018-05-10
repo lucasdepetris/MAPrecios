@@ -177,7 +177,7 @@ public class VerProductoPorId extends AppCompatActivity {
         if(sharedPreferences.contains("Lat")){
             lati = Double.parseDouble(sharedPreferences.getString("Lat",""));
             lng = Double.parseDouble(sharedPreferences.getString("Longitude",""));
-            requestCatalog = service.getProductoC(codigo, lati, lng,10);
+            requestCatalog = service.getProductoC(codigo, lati, lng,20);
             requestCatalog.enqueue(new Callback<com.preciosclaros.modelo.Response>() {
                 @Override
                 public void onResponse(Call<com.preciosclaros.modelo.Response> call, retrofit2.Response<Response> response) {
