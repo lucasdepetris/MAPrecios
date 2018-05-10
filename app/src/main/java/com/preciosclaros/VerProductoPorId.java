@@ -119,7 +119,7 @@ public class VerProductoPorId extends AppCompatActivity {
                                             return (p1.getPreciosProducto().getPrecioLista()).compareTo(p2.getPreciosProducto().getPrecioLista());
                                         }
                                     });
-                                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+                                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
                                     recyclerView.setLayoutManager(linearLayoutManager);
                                     recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
                                             getApplicationContext()
@@ -177,7 +177,7 @@ public class VerProductoPorId extends AppCompatActivity {
         if(sharedPreferences.contains("Lat")){
             lati = Double.parseDouble(sharedPreferences.getString("Lat",""));
             lng = Double.parseDouble(sharedPreferences.getString("Longitude",""));
-            requestCatalog = service.getProductoC(codigo, lati, lng,20);
+            requestCatalog = service.getProductoC(codigo, lati, lng,10);
             requestCatalog.enqueue(new Callback<com.preciosclaros.modelo.Response>() {
                 @Override
                 public void onResponse(Call<com.preciosclaros.modelo.Response> call, retrofit2.Response<Response> response) {
@@ -227,19 +227,10 @@ public class VerProductoPorId extends AppCompatActivity {
                             recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
                                     getApplicationContext()
                             ));
-                            if(sucursales != null) {
-                                SucursalesAdapter adapter = new SucursalesAdapter(sucursales, context, mejorSucursal);
-                                // lista =(ListView) findViewById(R.id.listaProductoSucursales);
-                                recyclerView.setAdapter(adapter);
-                                Log.i(TAG, "Artículo descargado: ");
-                            }else{
-                                menuOcultar = true;
-                                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                                imgError.setImageResource(R.drawable.carrito_triste);
-                                msgError.setText(R.string.problemaConServidor);
-                                findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
-                                //Toast.makeText(getApplicationContext(),"Hubo un problema de conexion al servidor",Toast.LENGTH_LONG).show();
-                            }
+                            SucursalesAdapter adapter = new SucursalesAdapter(sucursales, context,mejorSucursal);
+                            // lista =(ListView) findViewById(R.id.listaProductoSucursales);
+                            recyclerView.setAdapter(adapter);
+                            Log.i(TAG, "Artículo descargado: ");
                         }
                     } else {
                         menuOcultar = true;
@@ -258,7 +249,7 @@ public class VerProductoPorId extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<com.preciosclaros.modelo.Response> call, Throwable t) {
-                    Log.e(TAG, "Error:" + t.getCause());
+                    Log.e(TAG, "Error:" + t.getMessage() + t.getCause());
                     menuOcultar = true;
                     findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                     imgError.setImageResource(R.drawable.carrito_triste);
