@@ -197,15 +197,6 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
                             recyclerView.setAdapter(adapter);
                             String TAG = null;
                             Log.i(TAG, "Artículo descargado: ");
-                        }else{
-                            int code = response.code();
-                            String c = String.valueOf(code);
-                            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                            findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
-                            TextView msg = (TextView) findViewById(R.id.textMensajeErrorBuscar);
-                            ImageView img = (ImageView) findViewById(R.id.imgMsgError);
-                            img.setImageResource(R.drawable.carrito_triste);
-                            msg.setText(R.string.problemaConServidor);
                         }
                     } else {
                         int code = response.code();
