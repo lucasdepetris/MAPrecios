@@ -181,9 +181,9 @@ public class VerProductoPorId extends AppCompatActivity {
             requestCatalog.enqueue(new Callback<com.preciosclaros.modelo.Response>() {
                 @Override
                 public void onResponse(Call<com.preciosclaros.modelo.Response> call, retrofit2.Response<Response> response) {
-                    if (response.isSuccessful()) {
+                    if (response.isSuccessful() && response.body().getErrorMessage() == null) {
                         Producto received = response.body().getProducto();
-                        if (response.body() == null) {
+                        if (response.body().getProductos() == null) {
 
                             if(actividad.equalsIgnoreCase("barcode"))
                             {
@@ -226,7 +226,7 @@ public class VerProductoPorId extends AppCompatActivity {
                                     .into(imgProducto);
                             String mejorPrecio = response.body().getProductos().get(0).getPreciosProducto().getPrecioLista();
                             int i = 0;
-                            while (mejorPrecio == null){
+                            while (mejorPrecio.isEmpty()){
                                  mejorPrecio = response.body().getProductos().get(i+1).getPreciosProducto().getPrecioLista();
                                  i++;
                             }
@@ -250,7 +250,7 @@ public class VerProductoPorId extends AppCompatActivity {
                         menuOcultar = true;
                         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                         imgError.setImageResource(R.drawable.carrito_triste);
-                        msgError.setText(R.string.NotFound);
+                        msgError.setText(R.string.problemaConServidor);
                         findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
                         /*VerProductoPorId.this.finish();
                         Intent intent = new Intent(VerProductoPorId.this,NoResultFound.class);

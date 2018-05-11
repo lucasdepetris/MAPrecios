@@ -84,8 +84,13 @@ public class SucursalesAdapter extends RecyclerView.Adapter<SucursalesAdapter.Vi
            precio = Double.parseDouble(sucursal.getPreciosProducto().getPrecioLista());
         }catch (NumberFormatException e){
            Log.e("TAG",e.getMessage());
+           precio = 0.00;
         }
-        holder.precio.setText("$"+precio);
+        if(precio == 0.00){
+            holder.precio.setText("Precio no disponible.");
+        }else{
+            holder.precio.setText("$"+precio);
+        }
         holder.localidad.setText(sucursal.getLocalidad());
         Picasso.with(holder.imgComercio.getContext()).load("https://imagenes.preciosclaros.gob.ar/comercios/"+sucursal.getComercioId()+"-"+sucursal.getBanderaId()+".jpg")
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
