@@ -21,6 +21,7 @@ public class Response {
     }
 
     private int status;
+    private String errorMessage;
     //private  Sucursales mejorPrecio;
 
    /* public Sucursales getMejorPrecio() {
@@ -33,10 +34,21 @@ public class Response {
 
     Producto producto;
     ArrayList<Sucursales> sucursales = new ArrayList<Sucursales>();
-    public Response(Producto producto, ArrayList<Sucursales> sucursales , int status) {
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public Response(Producto producto, ArrayList<Sucursales> sucursales , int status, String errorMessage) {
         this.producto = producto;
         this.sucursales = sucursales;
         this.status = status;
+        this.errorMessage = errorMessage;
+
         //this.mejorPrecio = mejorPrecio;
     }
 

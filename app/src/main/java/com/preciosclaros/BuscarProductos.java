@@ -175,7 +175,7 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
             requestProductos.enqueue(new Callback<ProductosApi>() {
                 @Override
                 public void onResponse(Call<ProductosApi> call, retrofit2.Response<ProductosApi> response) {
-                    if (response.isSuccessful()) {
+                    if (response.isSuccessful() && response.body().getErrorMessage() == null) {
                         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                         ProductosApi received = response.body();
                         if(response.body().getProductos().isEmpty())

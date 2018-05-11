@@ -213,12 +213,24 @@ public class VerProductoPorId extends AppCompatActivity {
                             menuOcultar = false;
                             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                             VerSucursales = response.body().getProductos();
+                            Collections.sort(response.body().getProductos(), new Comparator<Sucursales>() {
+                                @Override
+                                public int compare(Sucursales p1, Sucursales p2) {
+                                    return (p1.getPreciosProducto().getPrecioLista()).compareTo(p2.getPreciosProducto().getPrecioLista());
+                                }
+                            });
                             mejorProducto = received;
                             Picasso.with(context).load("https://imagenes.preciosclaros.gob.ar/productos/" + codigo + ".jpg")
                                     .placeholder(R.drawable.image_placeholder)
                                     .error(R.drawable.no_image_aivalable)
                                     .into(imgProducto);
-                            precioProducto.setText("$" + response.body().getProductos().get(0).getPreciosProducto().getPrecioLista());
+                            String mejorPrecio = response.body().getProductos().get(0).getPreciosProducto().getPrecioLista();
+                            int i = 0;
+                            while (mejorPrecio == null){
+                                 mejorPrecio = response.body().getProductos().get(i+1).getPreciosProducto().getPrecioLista();
+                                 i++;
+                            }
+                            precioProducto.setText("$" + mejorPrecio);
                             nombreProducto.setText(received.getNombre());
                             ArrayList<Sucursales> sucursales = response.body().getProductos();
                             //mejorSucursal = response.body().getMejorPrecio();

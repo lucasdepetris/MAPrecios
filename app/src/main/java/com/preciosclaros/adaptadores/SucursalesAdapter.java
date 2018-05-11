@@ -2,8 +2,10 @@ package com.preciosclaros.adaptadores;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.nfc.Tag;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +42,7 @@ public class SucursalesAdapter extends RecyclerView.Adapter<SucursalesAdapter.Vi
     private List<Sucursales> sucursales = new ArrayList<Sucursales>();
     private Context mContext;
     private Sucursales MejorSucursal;
+    private Double precio;
 
     public SucursalesAdapter(List<Sucursales> sucursales, Context context,Sucursales MejorSucursal) {
         this.mContext = context;
@@ -77,7 +80,12 @@ public class SucursalesAdapter extends RecyclerView.Adapter<SucursalesAdapter.Vi
         holder.distancia.setText(sucursal.getDistanciaDescripcion());
         holder.nombreComercio.setText(sucursal.getBanderaDescripcion());
         holder.direccion.setText(sucursal.getDireccion());
-        holder.precio.setText("$"+sucursal.getPreciosProducto().getPrecioLista());
+        try{
+           precio = Double.parseDouble(sucursal.getPreciosProducto().getPrecioLista());
+        }catch (NumberFormatException e){
+           Log.e("TAG",e.getMessage());
+        }
+        holder.precio.setText("$"+precio);
         holder.localidad.setText(sucursal.getLocalidad());
         Picasso.with(holder.imgComercio.getContext()).load("https://imagenes.preciosclaros.gob.ar/comercios/"+sucursal.getComercioId()+"-"+sucursal.getBanderaId()+".jpg")
                 .memoryPolicy(MemoryPolicy.NO_CACHE)

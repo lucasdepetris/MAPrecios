@@ -19,6 +19,7 @@ public class ProductosApi {
     private int total;
     private int totalPagina;
     ArrayList<Producto> productos = new ArrayList<Producto>();
+    private String errorMessage;
 
     public int getStatus() {
         return status;
@@ -52,11 +53,20 @@ public class ProductosApi {
         this.productos = productos;
     }
 
-    public ProductosApi(int status, int total, int totalPagina, ArrayList<Producto> productos) {
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public ProductosApi(int status, int total, int totalPagina, ArrayList<Producto> productos, String errorMessage) {
 
         this.status = status;
         this.total = total;
         this.totalPagina = totalPagina;
         this.productos = productos;
+        this.errorMessage = errorMessage;
     }
 }
