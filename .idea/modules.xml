@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Maprecios.iml" filepath="$PROJECT_DIR$/Maprecios.iml" />
-      <module fileurl="file://$PROJECT_DIR$/PreciosClaros.iml" filepath="$PROJECT_DIR$/PreciosClaros.iml" />
+      <module fileurl="file://C:\Users\lucas\Documents\Desarrollo\Android\Maprecios2\Maprecios\PreciosClaros.iml" filepath="C:\Users\lucas\Documents\Desarrollo\Android\Maprecios2\Maprecios\PreciosClaros.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

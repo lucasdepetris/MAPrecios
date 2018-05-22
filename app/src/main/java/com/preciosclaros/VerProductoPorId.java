@@ -135,7 +135,7 @@ public class VerProductoPorId extends AppCompatActivity {
                                     Collections.sort(VerSucursales, new Comparator<Sucursales>() {
                                         @Override
                                         public int compare(Sucursales p1, Sucursales p2) {
-                                            return (p1.getDistanciaDescripcion()).compareTo(p2.getDistanciaDescripcion());
+                                            return Double.compare(p1.getDistanciaNumero(),p2.getDistanciaNumero());
                                         }
                                     });
                                     linearLayoutManager = new LinearLayoutManager(context);
