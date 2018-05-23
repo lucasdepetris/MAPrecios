@@ -1,29 +1,16 @@
 package com.preciosclaros.adaptadores;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.nfc.Tag;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.preciosclaros.R;
-import com.preciosclaros.VerProductoPorId;
 import com.preciosclaros.modelo.Sucursales;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
@@ -94,8 +81,8 @@ public class SucursalesAdapter extends RecyclerView.Adapter<SucursalesAdapter.Vi
         holder.localidad.setText(sucursal.getLocalidad());
         Picasso.with(holder.imgComercio.getContext()).load("https://imagenes.preciosclaros.gob.ar/comercios/"+sucursal.getComercioId()+"-"+sucursal.getBanderaId()+".jpg")
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
-                .placeholder(R.drawable.image_placeholder)
-                .error(R.drawable.no_image_aivalable)
+                .placeholder(R.drawable.img_not_available)
+                .error(R.drawable.img_not_available)
                 .into(holder.imgComercio);
         holder.agregar.setVisibility(View.INVISIBLE);
         /*

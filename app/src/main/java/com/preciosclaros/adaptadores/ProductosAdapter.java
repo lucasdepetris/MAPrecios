@@ -53,7 +53,7 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.View
         holder.marca.setText(producto.getMarca());
         holder.codigoBarra.setText(producto.getId());
         Picasso.with(holder.imgProducto.getContext()).load("https://imagenes.preciosclaros.gob.ar/productos/"+producto.getId()+".jpg")
-                .placeholder(R.drawable.image_placeholder).error(R.drawable.no_image_aivalable).into(holder.imgProducto);
+                .placeholder(R.drawable.img_not_available).error(R.drawable.img_not_available).into(holder.imgProducto);
        holder.contenedor.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
