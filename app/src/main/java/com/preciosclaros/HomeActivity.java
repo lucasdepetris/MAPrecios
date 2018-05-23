@@ -34,6 +34,7 @@ import com.google.zxing.integration.android.IntentResult;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+
 import static com.preciosclaros.SignInActivity.activityA;
 import static com.preciosclaros.SignInActivity.close;
 
@@ -110,7 +111,7 @@ public class HomeActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            activityA.getInstance().finish();
+            //activityA.finish();
             super.onBackPressed();
         }
     }
