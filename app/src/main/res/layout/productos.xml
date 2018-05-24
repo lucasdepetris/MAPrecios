@@ -40,10 +40,12 @@
             android:layout_toRightOf="@id/imgProducto"
             android:id="@+id/descripcionProducto"
             android:text=""
+            android:fontFamily="@font/quicksand_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/marcaProducto"
+            android:fontFamily="@font/quicksand_regular"
             android:layout_marginTop="5dp"
             android:paddingLeft="5dp"
             android:layout_toRightOf="@id/imgProducto"
@@ -52,6 +54,7 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/idProducto"
+            android:fontFamily="@font/quicksand_regular"
             android:layout_marginTop="5dp"
             android:paddingLeft="5dp"
             android:layout_toRightOf="@id/imgProducto"

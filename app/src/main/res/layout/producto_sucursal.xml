@@ -22,7 +22,7 @@
     <TextView
         android:layout_marginTop="15dp"
         android:textColor="@color/md_black_1000"
-        android:textStyle="bold"
+        android:fontFamily="@font/quicksand_bold"
         android:layout_below="@id/distancia"
         android:layout_toRightOf="@id/imgComercio"
         android:text=""
@@ -32,6 +32,7 @@
     <TextView
         android:textColor="@color/md_black_1000"
         android:textSize="18dp"
+        android:fontFamily="@font/quicksand_regular"
         android:text=""
         android:layout_toRightOf="@id/imgComercio"
         android:layout_below="@id/nombreComercio"
@@ -41,6 +42,7 @@
     <TextView
         android:textColor="@color/md_black_1000"
         android:text=""
+        android:fontFamily="@font/quicksand_regular"
         android:layout_below="@id/direccion"
         android:layout_toRightOf="@id/imgComercio"
         android:id="@+id/localidad"
@@ -48,7 +50,7 @@
         android:layout_height="wrap_content" />
     <TextView
         android:textColor="@color/md_black_1000"
-        android:textStyle="bold"
+        android:fontFamily="@font/quicksand_bold"
         android:text=""
         android:layout_below="@id/localidad"
         android:layout_toRightOf="@id/imgComercio"
