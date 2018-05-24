@@ -9,6 +9,7 @@
         android:textColor="@color/md_black_1000"
         android:id="@+id/distancia"
         android:text=""
+        android:fontFamily="@font/quicksand_regular"
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
