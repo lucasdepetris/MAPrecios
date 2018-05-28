@@ -56,7 +56,7 @@
             android:name=".HomeActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".IntroActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar.Fullscreen" />
     </application>
 
 </manifest>
