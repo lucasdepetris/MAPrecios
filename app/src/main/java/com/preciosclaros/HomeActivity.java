@@ -84,6 +84,14 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
+
+        sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
+        // get editor to edit in file
+        editor = sharedPreferences.edit();
+        editor.putBoolean("firstTime",false);
+        editor.apply();
+        editor.commit();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);

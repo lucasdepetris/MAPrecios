@@ -1,6 +1,7 @@
 package com.preciosclaros;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 
 public class Splash extends AppCompatActivity {
 
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     /** Duration of wait **/
     private final int SPLASH_DISPLAY_LENGTH = 1000;
 
@@ -25,10 +29,20 @@ public class Splash extends AppCompatActivity {
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
-                /* Create an Intent that will start the. */
-                Intent mainIntent = new Intent(Splash.this,IntroActivity.class);
-                Splash.this.startActivity(mainIntent);
-                Splash.this.finish();
+                sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
+                if(sharedPreferences.contains("firstTime"))
+                {
+                    /* Create an Intent that will start the. */
+                    Intent mainIntent = new Intent(Splash.this,IntroActivity.class);
+                    Splash.this.startActivity(mainIntent);
+                    Splash.this.finish();
+                }else{
+                    /* Create an Intent that will start the. */
+                    Intent mainIntent = new Intent(Splash.this,HomeActivity.class);
+                    Splash.this.startActivity(mainIntent);
+                    Splash.this.finish();
+                }
+
             }
         }, SPLASH_DISPLAY_LENGTH);
     }
