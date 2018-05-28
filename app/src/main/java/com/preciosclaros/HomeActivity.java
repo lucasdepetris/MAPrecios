@@ -1,6 +1,7 @@
 package com.preciosclaros;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,15 +10,20 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
+import android.widget.EditText;
 import android.widget.Toast;
 
 
@@ -37,6 +43,7 @@ import butterknife.OnClick;
 
 import static com.preciosclaros.SignInActivity.activityA;
 import static com.preciosclaros.SignInActivity.close;
+
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
@@ -103,6 +110,29 @@ public class HomeActivity extends AppCompatActivity
                 .build();
 
         // displaySelectedScreen(R.id.nav_menu1); SI QUIERO QUE INICIE EN UNA OPCION DEL MENU
+       /* AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.agregar_lista_dialog, null);
+        dialogBuilder.setView(dialogView);
+        final EditText nombreListaNueva = (EditText) dialogView.findViewById(R.id.NombreListaNueva);
+        final EditText Descripcion = (EditText) dialogView.findViewById(R.id.DescripcionListaNueva);
+        dialogBuilder.setTitle("Crear Lista");
+        dialogBuilder.setPositiveButton("Agregar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //do something with edt.getText().toString();
+
+            }
+        });
+        dialogBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //pass
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+        b.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.colorSecondary));
+        b.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.colorSecondary));
+        */
     }
 
     @Override

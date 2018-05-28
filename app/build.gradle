@@ -18,6 +18,9 @@ android {
     }
 }
 
+repositories {
+    maven { url 'https://jitpack.io' }
+}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -42,5 +45,7 @@ dependencies {
     api 'com.android.support:recyclerview-v7:27.0.1'
     testImplementation 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    implementation 'com.github.apl-devs:appintro:v4.2.3'
 }
+
 apply plugin: 'com.google.gms.google-services'
