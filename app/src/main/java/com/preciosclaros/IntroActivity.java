@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.github.paolorotolo.appintro.AppIntro;
+import com.github.paolorotolo.appintro.AppIntro2;
+import com.github.paolorotolo.appintro.AppIntro2Fragment;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 import com.mikepenz.materialize.color.Material;
 
@@ -21,9 +23,11 @@ public class IntroActivity extends AppIntro {
 
         // Instead of fragments, you can also use our default slide
         // Just set a title, description, background and image. AppIntro will do the rest.
+
         addSlide(AppIntroFragment.newInstance("Busca Productos", "Busca un producto mediante su nombre o escaneando su codigo de barra.",R.drawable.buscar_product, getResources().getColor(R.color.grayBackground)));
         addSlide(AppIntroFragment.newInstance("Ahorra Dinero", "Elegpur++i el mejor precio segun tus prioridades!",R.drawable.save_money_intro, getResources().getColor(R.color.grayBackground)));
         addSlide(AppIntroFragment.newInstance("Ubicación", "Busca los productos cercanos al punto que elijas.",R.drawable.gps_intro_circle, getResources().getColor(R.color.grayBackground)));
+        //addSlide(SampleSlide.newInstance(R.layout.buscar_productos));
 
         // OPTIONAL METHODS
         // Override bar/separator color.
