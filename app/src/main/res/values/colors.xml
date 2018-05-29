@@ -8,4 +8,7 @@
     <color name="btn_bg">#3e4a56</color>
     <color name="colorSecondary">#0477f4</color>
     <color name="gray">#eeee</color>
+    <color name="green">#00994C</color>
+    <color name="grayBackground">#E0E0E0</color>
+    <color name="verdeagua">#009999</color>
 </resources>

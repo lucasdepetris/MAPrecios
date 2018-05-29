@@ -21,9 +21,9 @@ public class IntroActivity extends AppIntro {
 
         // Instead of fragments, you can also use our default slide
         // Just set a title, description, background and image. AppIntro will do the rest.
-        addSlide(AppIntroFragment.newInstance("Busca Productos", "Busca un producto mediante su nombre o escaneando su codigo de barra.",R.drawable.buscar_product, getResources().getColor(R.color.colorPrimaryLight)));
-        addSlide(AppIntroFragment.newInstance("Ahorra Dinero", "Elegpur++i el mejor precio segun tus prioridades!",R.drawable.save_money_intro, getResources().getColor(R.color.colorPrimaryLight)));
-        addSlide(AppIntroFragment.newInstance("Ubicación", "Busca los productos cercanos al punto que elijas.",R.drawable.gps_intro_circle, getResources().getColor(R.color.colorPrimaryLight)));
+        addSlide(AppIntroFragment.newInstance("Busca Productos", "Busca un producto mediante su nombre o escaneando su codigo de barra.",R.drawable.buscar_product, getResources().getColor(R.color.grayBackground)));
+        addSlide(AppIntroFragment.newInstance("Ahorra Dinero", "Elegpur++i el mejor precio segun tus prioridades!",R.drawable.save_money_intro, getResources().getColor(R.color.grayBackground)));
+        addSlide(AppIntroFragment.newInstance("Ubicación", "Busca los productos cercanos al punto que elijas.",R.drawable.gps_intro_circle, getResources().getColor(R.color.grayBackground)));
 
         // OPTIONAL METHODS
         // Override bar/separator color.
