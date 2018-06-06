@@ -155,6 +155,8 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
                 editor.putString("Longitude", String.valueOf(place.getLatLng().longitude));
                 editor.apply();
                 editor.commit();
+                buscarProd((String) buscador.getQuery().toString());
+
             }
         }
         if(requestCode == 2) {
