@@ -28,6 +28,8 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.gson.Gson;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.preciosclaros.adaptadores.ProductosAdapter;
 import com.preciosclaros.modelo.*;
 
@@ -58,6 +60,9 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
     RecyclerView recyclerView;
     @BindView(R.id.searchProducto)
     SearchView buscador;
+    private IntentIntegrator qrScan;
+    private boolean scan = false;
+    static  boolean backVerProducto;
     private boolean mapaShow;
     public double latitud =0;
     public void buscarProd(String query) {
@@ -66,18 +71,25 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         buscarProducto(query);
     }
-    public void cambiarUbicacion(){
+    public void cambiarUbicacion(int request){
         if(!mapaShow) {
             PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
             mapaShow = true;
             try {
-                startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
+                startActivityForResult(builder.build(this), request);
             } catch (GooglePlayServicesRepairableException e) {
                 e.printStackTrace();
             } catch (GooglePlayServicesNotAvailableException e) {
                 e.printStackTrace();
             }
         }
+    }
+    public void escanear(){
+        scan = true;
+        qrScan = new IntentIntegrator(this);
+        qrScan.setBeepEnabled(false);
+        //attaching onclick listener
+        qrScan.initiateScan();
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,11 +129,24 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
         }
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == PLACE_PICKER_REQUEST) {
+        if(scan) {
+            IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+            //if qrcode has nothing in it
+            if(result != null) {
+                if (result.getContents() != null) {
+                    //if qr contains data
+                    Intent intent = new Intent(BuscarProductos.this, VerProductoPorId.class);
+                    intent.setFlags(intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.putExtra("actividad", "buscarproducto");
+                    intent.putExtra("idProducto", result.getContents());
+                    startActivity(intent);
+                    //buscarProducto(result.getContents());
+                }
+            }else {super.onActivityResult(requestCode, resultCode, data);}
+        }
+        if(requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(data, this);
-                HomeActivity.ubicacion.setTitle(place.getAddress());
-                HomeActivity.ubicacion.setCheckable(false);
                 sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
                 // get editor to edit in file
                 editor = sharedPreferences.edit();
@@ -130,6 +155,20 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
                 editor.putString("Longitude", String.valueOf(place.getLatLng().longitude));
                 editor.apply();
                 editor.commit();
+            }
+        }
+        if(requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
+                sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
+                // get editor to edit in file
+                editor = sharedPreferences.edit();
+                editor.putString("ubicacion",place.getAddress().toString());
+                editor.putString("Lat", String.valueOf(place.getLatLng().latitude));
+                editor.putString("Longitude", String.valueOf(place.getLatLng().longitude));
+                editor.apply();
+                editor.commit();
+                escanear();
             }
         }
         mapaShow = false;
@@ -145,7 +184,18 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_favorite:
-                cambiarUbicacion();
+                cambiarUbicacion(1);
+                break;
+            case R.id.action_scan:
+                sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
+                if(!sharedPreferences.contains("Lat"))
+                {
+                    cambiarUbicacion(2);
+                }
+                if(sharedPreferences.contains("Lat"))
+                {
+                    escanear();
+                }
                 break;
         }
         return true;

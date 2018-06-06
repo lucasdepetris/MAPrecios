@@ -9,4 +9,9 @@
         android:icon="@drawable/ic_room_white_48dp"
         android:title="camera"
         app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_scan"
+        android:icon="@drawable/icon_scan"
+        android:title="scan"
+        app:showAsAction="ifRoom"/>
 </menu>

@@ -38,7 +38,7 @@ public class Splash extends AppCompatActivity {
                     Splash.this.finish();
                 }else{
                     /* Create an Intent that will start the. */
-                    Intent mainIntent = new Intent(Splash.this,HomeActivity.class);
+                    Intent mainIntent = new Intent(Splash.this,BuscarProductos.class);
                     Splash.this.startActivity(mainIntent);
                     Splash.this.finish();
                 }
