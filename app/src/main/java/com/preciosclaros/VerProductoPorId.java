@@ -19,10 +19,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.preciosclaros.adaptadores.ProductosAdapter;
 import com.preciosclaros.adaptadores.SucursalesAdapter;
 import com.preciosclaros.modelo.Producto;
+import com.preciosclaros.modelo.ProductosApi;
 import com.preciosclaros.modelo.Response;
 import com.preciosclaros.modelo.Sucursales;
+import com.preciosclaros.service.HttpService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -49,7 +52,8 @@ public class VerProductoPorId extends AppCompatActivity {
     //View Objects
     @BindView(R.id.MejorNombre)
     TextView nombreProducto;
-    @BindView(R.id.MejorPrecio) TextView precioProducto;
+    @BindView(R.id.MejorPrecio)
+    TextView precioProducto;
     @BindView(R.id.MejorImgProducto)
     ImageView imgProducto;
     @BindView(R.id.recycler)
@@ -65,8 +69,11 @@ public class VerProductoPorId extends AppCompatActivity {
     private String idProducto;
     private ArrayList<Sucursales> VerSucursales;
     private boolean menuOcultar = false;
-    @BindView(R.id.imgErrorVerProductoPorId)ImageView imgError;
-    @BindView(R.id.textMensajeErrorBuscar) TextView msgError;
+    @BindView(R.id.imgErrorVerProductoPorId)
+    ImageView imgError;
+    @BindView(R.id.textMensajeErrorBuscar)
+    TextView msgError;
+
     /*
     @OnClick(R.id.agregarMejorPrecio)public void agregarProducto(){
         if(cargoSelect)
@@ -77,11 +84,13 @@ public class VerProductoPorId extends AppCompatActivity {
             cargarSelect();
         }
     }*/
-    @OnClick(R.id.btnReintentarBuscar)public void buscarDeNuevo(){
+    @OnClick(R.id.btnReintentarBuscar)
+    public void buscarDeNuevo() {
         findViewById(R.id.msgErrorUbicacion).setVisibility(View.GONE);
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         buscarProducto(idProducto);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,25 +102,27 @@ public class VerProductoPorId extends AppCompatActivity {
         buscarProducto(intent.getStringExtra("idProducto"));
         //cargarSelect();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.filter, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(!menuOcultar) {
+        if (!menuOcultar) {
             switch (item.getItemId()) {
                 case R.id.filter:
-                    CharSequence colors[] = new CharSequence[] {"Ordenar Por Precio", "Ordenar Por Cercania"};
+                    CharSequence colors[] = new CharSequence[]{"Ordenar Por Precio", "Ordenar Por Cercania"};
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     builder.setTitle("Filtrar");
                     builder.setItems(colors, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // the user clicked on colors[which]
-                            switch (which){
+                            switch (which) {
                                 case 0:
                                     findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
                                     Collections.sort(VerSucursales, new Comparator<Sucursales>() {
@@ -135,7 +146,7 @@ public class VerProductoPorId extends AppCompatActivity {
                                     Collections.sort(VerSucursales, new Comparator<Sucursales>() {
                                         @Override
                                         public int compare(Sucursales p1, Sucursales p2) {
-                                            return Double.compare(p1.getDistanciaNumero(),p2.getDistanciaNumero());
+                                            return Double.compare(p1.getDistanciaNumero(), p2.getDistanciaNumero());
                                         }
                                     });
                                     linearLayoutManager = new LinearLayoutManager(context);
@@ -157,57 +168,33 @@ public class VerProductoPorId extends AppCompatActivity {
         }
         return true;
     }
+
     public void buscarProducto(final String codigo) {
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .addInterceptor(interceptor).build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create(new Gson()))
-                .baseUrl("https://d735s5r2zljbo.cloudfront.net/prod/")
-                .build();
-        service = retrofit.create(ApiPrecios.class);
-
-        double lati ,lng;
+        double lati, lng;
         sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
-        if(sharedPreferences.contains("Lat")){
-            lati = Double.parseDouble(sharedPreferences.getString("Lat",""));
-            lng = Double.parseDouble(sharedPreferences.getString("Longitude",""));
-            requestCatalog = service.getProductoC(codigo, lati, lng,20);
-            requestCatalog.enqueue(new Callback<com.preciosclaros.modelo.Response>() {
+        if (sharedPreferences.contains("Lat")) {
+            lati = Double.parseDouble(sharedPreferences.getString("Lat", ""));
+            lng = Double.parseDouble(sharedPreferences.getString("Longitude", ""));
+            HttpService.getInstance().GetProductoByID(codigo, lati, lng, 100, new HttpService.CustomCallListener<retrofit2.Response<Response>>() {
                 @Override
-                public void onResponse(Call<com.preciosclaros.modelo.Response> call, retrofit2.Response<Response> response) {
-                    if (response.isSuccessful() && response.body().getErrorMessage() == null) {
+                public void getResult(retrofit2.Response<Response> response) {
+                    if (null != response) {
                         Producto received = response.body().getProducto();
                         if (response.body().getProductos() == null) {
 
-                            if(actividad.equalsIgnoreCase("barcode"))
-                            {
+                            if (actividad.equalsIgnoreCase("barcode")) {
                                 menuOcultar = true;
                                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                                 imgError.setImageResource(R.drawable.carrito_triste);
                                 msgError.setText(R.string.productoSinPrecio);
                                 findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
-                                /*VerProductoPorId.this.finish();
-                                Intent intent = new Intent(VerProductoPorId.this, NoResultFound.class);
-                                intent.setFlags(intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                startActivity(intent);*/
-                            }
-                            else{
+                            } else {
                                 menuOcultar = true;
                                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                                 imgError.setImageResource(R.drawable.carrito_triste);
                                 msgError.setText(R.string.productoSinPrecio);
                                 findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
-                                /*VerProductoPorId.this.finish();
-                                Intent intent = new Intent(VerProductoPorId.this, NoResultSearch.class);
-                                intent.setFlags(intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                startActivity(intent);*/
                             }
 
                         } else {
@@ -227,9 +214,9 @@ public class VerProductoPorId extends AppCompatActivity {
                                     .into(imgProducto);
                             String mejorPrecio = response.body().getProductos().get(0).getPreciosProducto().getPrecioLista();
                             int i = 0;
-                            while (mejorPrecio.isEmpty()){
-                                 mejorPrecio = response.body().getProductos().get(i+1).getPreciosProducto().getPrecioLista();
-                                 i++;
+                            while (mejorPrecio.isEmpty()) {
+                                mejorPrecio = response.body().getProductos().get(i + 1).getPreciosProducto().getPrecioLista();
+                                i++;
                             }
                             precioProducto.setText("$" + mejorPrecio);
                             nombreProducto.setText(received.getNombre());
@@ -240,7 +227,7 @@ public class VerProductoPorId extends AppCompatActivity {
                             recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
                                     getApplicationContext()
                             ));
-                            if(!sucursales.isEmpty()) {
+                            if (!sucursales.isEmpty()) {
                                 SucursalesAdapter adapter = new SucursalesAdapter(sucursales, context, mejorSucursal);
                                 // lista =(ListView) findViewById(R.id.listaProductoSucursales);
                                 recyclerView.setAdapter(adapter);
@@ -253,28 +240,11 @@ public class VerProductoPorId extends AppCompatActivity {
                         imgError.setImageResource(R.drawable.carrito_triste);
                         msgError.setText(R.string.problemaConServidor);
                         findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
-                        /*VerProductoPorId.this.finish();
-                        Intent intent = new Intent(VerProductoPorId.this,NoResultFound.class);
-                        intent.setFlags(intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        startActivity(intent);*/
-                        int code = response.code();
-                        String c = String.valueOf(code);
                     }
                 }
-
-                @Override
-                public void onFailure(Call<com.preciosclaros.modelo.Response> call, Throwable t) {
-                    Log.e(TAG, "Error:" + t.getMessage() + t.getCause());
-                    menuOcultar = true;
-                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                    imgError.setImageResource(R.drawable.carrito_triste);
-                    msgError.setText(R.string.problemaConServidor);
-                    findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
-                    //Toast.makeText(getApplicationContext(),"Hubo un problema de conexion al servidor",Toast.LENGTH_LONG).show();
-                }
-
             });
-        }else {
+
+        } else {
             menuOcultar = true;
             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
@@ -284,8 +254,7 @@ public class VerProductoPorId extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(actividad.equalsIgnoreCase("barcode"))
-        {
+        if (actividad.equalsIgnoreCase("barcode")) {
             HomeActivity.backVerProducto = true;
         }
         super.onBackPressed();

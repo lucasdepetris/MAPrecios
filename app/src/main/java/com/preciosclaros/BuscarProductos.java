@@ -30,6 +30,8 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.gson.Gson;
 import com.preciosclaros.adaptadores.ProductosAdapter;
 import com.preciosclaros.modelo.*;
+import com.preciosclaros.service.Api;
+import com.preciosclaros.service.HttpService;
 
 import java.util.concurrent.TimeUnit;
 
@@ -152,55 +154,41 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
     }
 
     public void buscarProducto(final String nombre) {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .addInterceptor(interceptor).build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create(new Gson()))
-                .baseUrl("https://d735s5r2zljbo.cloudfront.net/prod/")
-                .build();
-        service = retrofit.create(ApiPrecios.class);
 
         double lati, lng;
         sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
         if (sharedPreferences.contains("Lat") && !sharedPreferences.getString("Lat","").equalsIgnoreCase("vacio") ) {
             lati = Double.parseDouble(sharedPreferences.getString("Lat", ""));
             lng = Double.parseDouble(sharedPreferences.getString("Longitude", ""));
-            requestProductos = service.BuscarProductosC(nombre,lati,lng,100);
-            requestProductos.enqueue(new Callback<ProductosApi>() {
+            HttpService.getInstance().BuscarProductos(nombre,lati,lng,100, new HttpService.CustomCallListener<ProductosApi>() {
                 @Override
-                public void onResponse(Call<ProductosApi> call, retrofit2.Response<ProductosApi> response) {
-                    if (response.isSuccessful() && response.body().getErrorMessage() == null) {
+                public void getResult(ProductosApi object) {
+                    if (null != object){
+                        // check objects and do whatever...
                         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                        ProductosApi received = response.body();
-                        if(response.body().getProductos().isEmpty())
-                        {
-                            findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
-                            TextView msg = (TextView) findViewById(R.id.textMensajeErrorBuscar);
-                            ImageView img = (ImageView) findViewById(R.id.imgMsgError);
-                            img.setImageResource(R.drawable.lupa_error);
-                            msg.setText(R.string.sinCoincidencias);
-                        }
+                        if(object.getProductos().isEmpty())
+                            {
+                                findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
+                                TextView msg = (TextView) findViewById(R.id.textMensajeErrorBuscar);
+                                ImageView img = (ImageView) findViewById(R.id.imgMsgError);
+                                img.setImageResource(R.drawable.lupa_error);
+                                msg.setText(R.string.sinCoincidencias);
+                            }
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
                         recyclerView.setLayoutManager(linearLayoutManager);
                         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
                                 getApplicationContext()
                         ));
-                        if(!received.getProductos().isEmpty()){
-                            ProductosAdapter adapter = new ProductosAdapter(received.getProductos());
+                        if(!object.getProductos().isEmpty()){
+                            ProductosAdapter adapter = new ProductosAdapter(object.getProductos());
                             // lista =(ListView) findViewById(R.id.listaProductoSucursales);
                             recyclerView.setAdapter(adapter);
                             String TAG = null;
                             Log.i(TAG, "Artículo descargado: ");
+                            }
                         }
-                    } else {
-                        int code = response.code();
-                        String c = String.valueOf(code);
+                    else {
+                        // ... do other stuff .. handle failure codes etc.
                         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                         findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
                         TextView msg = (TextView) findViewById(R.id.textMensajeErrorBuscar);
@@ -208,22 +196,7 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
                         img.setImageResource(R.drawable.carrito_triste);
                         msg.setText(R.string.problemaConServidor);
                     }
-
-
                 }
-
-                @Override
-                public void onFailure(Call<ProductosApi> call, Throwable t) {
-                    String TAG = null;
-                    Log.e(TAG, "Error:" + t.getCause());
-                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                    findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
-                    TextView msg = (TextView) findViewById(R.id.textMensajeErrorBuscar);
-                    ImageView img = (ImageView) findViewById(R.id.imgMsgError);
-                    img.setImageResource(R.drawable.carrito_triste);
-                    msg.setText(R.string.noConexion);
-                }
-
             });
         } else {
             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
