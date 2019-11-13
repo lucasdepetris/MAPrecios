@@ -12,7 +12,7 @@ public class HttpService {
 
     private static HttpService instance = null;
     private String TAG = "HttpService";
-    private String GENERIC_ERROR_MSG = "No se pudo conectar con el servidor. Por favor, intente más tarde o contacte al administrador";
+    private String GENERIC_ERROR_MSG = "No se pudo conectar con el servidor";
     private String PARSE_JSON_ERROR = "No se pudo procesar la respuesta del servidor";
 
 

@@ -176,9 +176,7 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
                             }
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
                         recyclerView.setLayoutManager(linearLayoutManager);
-                        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
-                                getApplicationContext()
-                        ));
+
                         if(!object.getProductos().isEmpty()){
                             ProductosAdapter adapter = new ProductosAdapter(object.getProductos());
                             // lista =(ListView) findViewById(R.id.listaProductoSucursales);

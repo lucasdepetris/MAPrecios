@@ -81,6 +81,7 @@
     </RelativeLayout>
    <android.support.v7.widget.RecyclerView
        android:background="@color/white"
+       android:padding="5dp"
        android:clickable="true"
        android:id="@+id/ReciclerProductos"
        android:layout_width="match_parent"
