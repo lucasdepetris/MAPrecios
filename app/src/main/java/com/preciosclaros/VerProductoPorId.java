@@ -133,9 +133,7 @@ public class VerProductoPorId extends AppCompatActivity {
                                     });
                                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
                                     recyclerView.setLayoutManager(linearLayoutManager);
-                                    recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
-                                            getApplicationContext()
-                                    ));
+
                                     SucursalesAdapter adapter = new SucursalesAdapter(VerSucursales, context, mejorSucursal);
                                     // lista =(ListView) findViewById(R.id.listaProductoSucursales);
                                     recyclerView.setAdapter(adapter);
@@ -151,9 +149,7 @@ public class VerProductoPorId extends AppCompatActivity {
                                     });
                                     linearLayoutManager = new LinearLayoutManager(context);
                                     recyclerView.setLayoutManager(linearLayoutManager);
-                                    recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
-                                            getApplicationContext()
-                                    ));
+
                                     adapter = new SucursalesAdapter(VerSucursales, context, mejorSucursal);
                                     // lista =(ListView) findViewById(R.id.listaProductoSucursales);
                                     recyclerView.setAdapter(adapter);
@@ -224,9 +220,7 @@ public class VerProductoPorId extends AppCompatActivity {
                             //mejorSucursal = response.body().getMejorPrecio();
                             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
                             recyclerView.setLayoutManager(linearLayoutManager);
-                            recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
-                                    getApplicationContext()
-                            ));
+
                             if (!sucursales.isEmpty()) {
                                 SucursalesAdapter adapter = new SucursalesAdapter(sucursales, context, mejorSucursal);
                                 // lista =(ListView) findViewById(R.id.listaProductoSucursales);
