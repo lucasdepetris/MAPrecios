@@ -84,7 +84,7 @@ public class SucursalesAdapter extends RecyclerView.Adapter<SucursalesAdapter.Vi
                 .placeholder(R.drawable.img_not_available)
                 .error(R.drawable.img_not_available)
                 .into(holder.imgComercio);
-        holder.agregar.setVisibility(View.INVISIBLE);
+        //holder.agregar.setVisibility(View.INVISIBLE);
         /*
         holder.agregar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,10 +117,10 @@ public class SucursalesAdapter extends RecyclerView.Adapter<SucursalesAdapter.Vi
         TextView localidad;
         @BindView(R.id.imgComercio)
         ImageView imgComercio;
-        @BindView(R.id.agregar)
-        ImageButton agregar;
-        @BindView(R.id.estrella)
-        ImageButton estrella;
+        /*@BindView(R.id.agregar)
+        ImageButton agregar;*/
+        /*@BindView(R.id.estrella)
+        ImageButton estrella;*/
         public ViewHolder(View itemView) {
             super(itemView);
             this.item = itemView;

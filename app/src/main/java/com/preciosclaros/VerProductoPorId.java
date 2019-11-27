@@ -94,6 +94,9 @@ public class VerProductoPorId extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         setContentView(R.layout.producto_por_codigo);
         ButterKnife.bind(this);
         Intent intent = getIntent();
@@ -108,6 +111,12 @@ public class VerProductoPorId extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.filter, menu);
         return true;
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     @Override
@@ -159,6 +168,10 @@ public class VerProductoPorId extends AppCompatActivity {
                         }
                     });
                     builder.show();
+                    break;
+                case android.R.id.home:
+                    finish();
+                    //return true;
                     break;
             }
         }

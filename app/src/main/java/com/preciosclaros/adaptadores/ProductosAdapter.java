@@ -1,7 +1,11 @@
 package com.preciosclaros.adaptadores;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,7 +65,11 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.View
                intent.setFlags(intent.FLAG_ACTIVITY_SINGLE_TOP);
                intent.putExtra("actividad","buscarproductos");
                intent.putExtra("idProducto",producto.getId());
-               context.startActivity(intent);
+               Activity activity = (Activity) context;
+               activity.startActivity(intent);
+               //context.startActivity(intent);
+               activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
            }
        });
     }

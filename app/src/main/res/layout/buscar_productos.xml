@@ -80,7 +80,7 @@
             android:layout_height="wrap_content" />
     </RelativeLayout>
    <android.support.v7.widget.RecyclerView
-       android:background="@color/white"
+       android:background="@color/gray"
        android:padding="5dp"
        android:clickable="true"
        android:id="@+id/ReciclerProductos"

@@ -4,9 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
-    android:background="@color/white">
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:background="@color/gray">
     <android.support.v7.widget.CardView
+        app:cardBackgroundColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="5dp"
@@ -14,11 +18,14 @@
         android:id="@+id/cv"
         >
         <RelativeLayout
+            android:paddingRight="5dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="5dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/productoSucursal"
-            android:background="@color/grayBackground"
+            android:background="@color/white"
             >
             <TextView
                 android:textColor="@color/md_black_1000"
@@ -33,9 +40,9 @@
                 android:id="@+id/imgComercio"
                 android:layout_width="100dp"
                 android:layout_height="80dp"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="5dp"/>
             <TextView
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:textColor="@color/md_black_1000"
                 android:fontFamily="@font/quicksand_bold"
                 android:layout_below="@id/distancia"
@@ -72,34 +79,7 @@
                 android:id="@+id/precio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <ImageButton
-                android:visibility="gone"
-                android:layout_marginTop="10dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="18dp"
-                android:layout_alignParentBottom="true"
-                android:src="@drawable/btn_agregar_producto"
-                android:background="@android:color/transparent"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                android:layout_below="@id/localidad"
-                android:id="@+id/agregar"
-                android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <ImageButton
-                android:visibility="gone"
-                android:layout_below="@id/localidad"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="10dp"
-                android:layout_alignParentBottom="true"
-                android:src="@drawable/estrella"
-                android:background="@android:color/transparent"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                android:id="@+id/estrella"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
