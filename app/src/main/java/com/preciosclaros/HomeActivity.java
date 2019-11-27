@@ -75,6 +75,7 @@ public class HomeActivity extends AppCompatActivity
                 Intent intent3 = new Intent(HomeActivity.this,BuscarProductos.class);
                 intent3.setFlags(intent3.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent3);
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 break;
         }
     }
@@ -222,6 +223,7 @@ public class HomeActivity extends AppCompatActivity
                                                      intent.putExtra("actividad", "barcode");
                                                      intent.putExtra("idProducto", result.getContents());
                                                      startActivity(intent);
+                                                     overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                                                     //buscarProducto(result.getContents());
                                                      }
                                                 }else {super.onActivityResult(requestCode, resultCode, data);}

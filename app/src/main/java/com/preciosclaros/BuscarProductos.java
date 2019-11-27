@@ -153,6 +153,12 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
         return true;
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
     public void buscarProducto(final String nombre) {
 
         double lati, lng;
@@ -203,7 +209,7 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
     }
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Toast.makeText(getApplicationContext(),"Falla conexion: "+connectionResult.getErrorMessage(),Toast.LENGTH_LONG);
+        Toast.makeText(getApplicationContext(),"Falla conexion: "+connectionResult.getErrorMessage(),Toast.LENGTH_LONG).show();
     }
 
 }

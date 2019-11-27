@@ -35,11 +35,13 @@ public class Splash extends AppCompatActivity {
                     /* Create an Intent that will start the. */
                     Intent mainIntent = new Intent(Splash.this,IntroActivity.class);
                     Splash.this.startActivity(mainIntent);
+                    overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                     Splash.this.finish();
                 }else{
                     /* Create an Intent that will start the. */
                     Intent mainIntent = new Intent(Splash.this,HomeActivity.class);
                     Splash.this.startActivity(mainIntent);
+                    overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                     Splash.this.finish();
                 }
 
