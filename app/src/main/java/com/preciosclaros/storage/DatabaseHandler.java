@@ -18,14 +18,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "maprecios_db";
 
     // Contacts table name
-    private static final String TABLE_USER = "user";
+    private static final String TABLE_LIST = "listas";
+    private static final String TABLE_PRODUCTS = "productos";
 
     // Contacts Table Columns names
-    private static final String KEY_USER_ID = "id";
-    private static final String KEY_USER_NAME = "nombre";
-    private static final String KEY_USER_CUSUARIO = "Cusuario";
-    private static final String KEY_USER_PASSWORD = "password";
-    private static final String KEY_USER_CODE = "code";
+    private static final String KEY_LIST_ID = "id";
+    private static final String KEY_LIST_NAME = "nombre";
+    private static final String KEY_LIST_DESCRIPTION = "descripcion";
+
+    private static final String KEY_PROD_ID = "id";
+    private static final String KEY_PROD_NAME = "nombre";
+    private static final String KEY_PROD_DESCRIPTION = "descripcion";
 
 
     private static DatabaseHandler mInstance = null;
@@ -45,10 +48,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Creating Tables
 
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + " ("
-                + KEY_USER_ID + " INTEGER PRIMARY KEY," + KEY_USER_NAME + " TEXT,"
-                + KEY_USER_CODE + " TEXT,"
-                + KEY_USER_CUSUARIO + " TEXT," + KEY_USER_PASSWORD + " TEXT )";
+        String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_LIST + " ("
+                + KEY_LIST_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_LIST_NAME + " TEXT,"
+                + KEY_LIST_DESCRIPTION + " TEXT )";
 
         db.execSQL(CREATE_USER_TABLE);
     }
@@ -61,7 +63,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     private void doResetDB(SQLiteDatabase db){
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_LIST);
         // Create tables again
         onCreate(db);
     }
