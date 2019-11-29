@@ -10,10 +10,17 @@ public class Listas {
     private int id;
     private String Nombre;
     private String Descripcion;
+    private ArrayList<Sucursales> items = new ArrayList<Sucursales>();
 
+    public ArrayList<Sucursales> getItems() {
+        return items;
+    }
 
-    public Listas(int id, String nombre, String descripcion) {
-        this.id = id;
+    public void setItems(ArrayList<Sucursales> items) {
+        this.items = items;
+    }
+
+    public Listas(String nombre, String descripcion) {
         Nombre = nombre;
         Descripcion = descripcion;
     }

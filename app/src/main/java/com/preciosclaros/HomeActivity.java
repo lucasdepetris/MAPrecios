@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
@@ -16,7 +17,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +28,8 @@ import android.view.View;
 import android.widget.Button;
 
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -36,7 +42,12 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.preciosclaros.adaptadores.ListasAdapter;
+import com.preciosclaros.modelo.Listas;
 
+import java.util.ArrayList;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -54,7 +65,77 @@ public class HomeActivity extends AppCompatActivity
     static  boolean backVerProducto;
     GoogleApiClient mGoogleApiClient;
     private  boolean mapaShow;
-    @OnClick({R.id.escanear, R.id.buscar}) public void elejirOpcion(Button btn){
+    @BindView(R.id.reciclerListas)
+    RecyclerView recyclerView;
+    private ArrayList<Listas> misListas = new ArrayList<Listas>();
+
+    private TextView mTextMessage;
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.scan:
+                    mTextMessage.setText(R.string.escanear);
+                    sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
+                    if(!sharedPreferences.contains("Lat"))
+                    {
+                        elegirUbicacion(2);
+                    }
+                    if(sharedPreferences.contains("Lat"))
+                    {
+                        escanear();
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(),"Debe elegir una ubicacion antes de buscar",Toast.LENGTH_LONG).show();
+                    }
+                    return true;
+                case R.id.buscar:
+                    mTextMessage.setText(R.string.buscar);
+                    Intent intent3 = new Intent(HomeActivity.this,BuscarProductos.class);
+                    intent3.setFlags(intent3.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intent3);
+                    overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                    return true;
+            }
+            return false;
+        }
+    };
+    @OnClick({R.id.AgregarLista}) public void addList(Button btn){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Title");
+
+        LinearLayout lila1= new LinearLayout(this);
+        lila1.setOrientation(LinearLayout.VERTICAL);
+        final EditText input = new EditText(this);
+        final EditText input1 = new EditText(this);
+        lila1.addView(input);
+        lila1.addView(input1);
+        builder.setView(lila1);
+
+
+        // Set up the buttons
+        builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(!input.getText().toString().equals("") ){
+                    misListas.add(new Listas(input.getText().toString(),input1.getText().toString()));
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+   /* @OnClick({R.id.escanear, R.id.buscar}) public void elejirOpcion(Button btn){
         switch (btn.getId()){
             case R.id.escanear:
                 sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
@@ -78,14 +159,16 @@ public class HomeActivity extends AppCompatActivity
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 break;
         }
-    }
+    }*/
     static MenuItem us,ubicacion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
-
+        mTextMessage = (TextView) findViewById(R.id.message);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
         // get editor to edit in file
         editor = sharedPreferences.edit();
@@ -118,6 +201,12 @@ public class HomeActivity extends AppCompatActivity
                 .enableAutoManage(this, this)
                 .build();
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        ListasAdapter adapter = new ListasAdapter(misListas,getApplicationContext());
+        recyclerView.setAdapter(adapter);
+
+
         // displaySelectedScreen(R.id.nav_menu1); SI QUIERO QUE INICIE EN UNA OPCION DEL MENU
        /* AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
@@ -142,6 +231,13 @@ public class HomeActivity extends AppCompatActivity
         b.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.colorSecondary));
         b.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.colorSecondary));
         */
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Code to refresh listview
+        Toast.makeText(getApplicationContext(),"RESUME",Toast.LENGTH_SHORT).show();
     }
 
     @Override
