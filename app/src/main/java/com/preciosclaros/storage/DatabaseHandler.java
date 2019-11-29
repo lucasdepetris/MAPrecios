@@ -19,6 +19,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Contacts table name
     private static final String TABLE_LIST = "listas";
+    private static final String TABLE_COMERCIOS = "comercios";
     private static final String TABLE_PRODUCTS = "productos";
 
     // Contacts Table Columns names
@@ -26,10 +27,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_LIST_NAME = "nombre";
     private static final String KEY_LIST_DESCRIPTION = "descripcion";
 
-    private static final String KEY_PROD_ID = "id";
-    private static final String KEY_PROD_NAME = "nombre";
-    private static final String KEY_PROD_DESCRIPTION = "descripcion";
 
+    private static final String KEY_COMERCIO_ID = "id";
+    private static final String KEY_COM_ID = "id_com";
+    private static final String KEY_COM_COMERCIORAZONSOCIAL = "comercio_razon_social";
+    private static final String KEY_COM_DISTANCIANUMERO = "distancia_numero";
+    private static final String KEY_COM_DISTANCIADESCRIPCION = "distancia_descripcion";
+    private static final String KEY_COM_BANDERAID = "bandera_id";
+    private static final String KEY_COM_ACTUALIZADOHOY = "actualizado_hoy";
+    private static final String KEY_COM_LAT = "lat";
+    private static final String KEY_COM_LNG = "lng";
+    private static final String KEY_COM_SUCURSALNOMBRE = "sucursal_nombre";
+    private static final String KEY_COM_SUCURSALTIPO = "sucursal_tipo";
+    private static final String KEY_COM_PROVINCIA = "provincia";
+    private static final String KEY_COM_COMERCIOID = "comercio_id";
+    private static final String KEY_FK_LISTA = "fk_lista";
+
+
+    private static final String KEY_PRODUCTO_ID = "id_prod";
+    private static final String KEY_PRO_ID = "id";
+    private static final String KEY_PRODUCTO_NAME = "nombre";
+    private static final String KEY_PRODUCTO_PRESENTACION = "presentacion";
+    private static final String KEY_PRODUCTO_MARCA = "marca";
+    private static final String KEY_FK_COMERCIO = "fk_comercio";
 
     private static DatabaseHandler mInstance = null;
     private final Context context;
@@ -48,11 +68,32 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Creating Tables
 
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_LIST + " ("
+        String CREATE_LIST_TABLE = "CREATE TABLE " + TABLE_LIST + " ("
                 + KEY_LIST_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_LIST_NAME + " TEXT,"
                 + KEY_LIST_DESCRIPTION + " TEXT )";
 
-        db.execSQL(CREATE_USER_TABLE);
+        String CREATE_COMERCIO_TABLE = "CREATE TABLE " + TABLE_COMERCIOS + " ("
+                + KEY_COMERCIO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+                + KEY_COM_ID + " INTEGER,"
+                + KEY_COM_COMERCIORAZONSOCIAL + " TEXT ,"
+                + KEY_COM_DISTANCIANUMERO + " REAL ,"
+                + KEY_FK_LISTA + " INTEGER, FOREIGN KEY ("+KEY_FK_LISTA+") REFERENCES "+TABLE_LIST +"("+KEY_LIST_ID+"))";
+
+        String CREATE_PRODUCTO_TABLE = "CREATE TABLE " + TABLE_PRODUCTS + " ("
+                + KEY_PRO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_PRODUCTO_ID + " INTEGER,"
+                + KEY_PRODUCTO_MARCA + " TEXT ,"
+                + KEY_PRODUCTO_NAME + " TEXT ,"
+                + KEY_PRODUCTO_PRESENTACION + " TEXT ,"
+                + KEY_FK_COMERCIO + " INTEGER ,"
+                + KEY_FK_LISTA + " INTEGER ,"
+                + "FOREIGN KEY ("+KEY_FK_COMERCIO+") REFERENCES "+TABLE_COMERCIOS +"("+KEY_COMERCIO_ID+") ,"
+                + "FOREIGN KEY ("+KEY_FK_LISTA+") REFERENCES "+TABLE_LIST +"("+KEY_LIST_ID+"))";
+
+
+        db.execSQL(CREATE_LIST_TABLE);
+        db.execSQL(CREATE_COMERCIO_TABLE);
+        db.execSQL(CREATE_PRODUCTO_TABLE);
     }
 
     // Upgrading database
@@ -64,9 +105,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private void doResetDB(SQLiteDatabase db){
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LIST);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_COMERCIOS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCTS);
         // Create tables again
         onCreate(db);
     }
+
 
     /*public void syncUsers(List<User> users){
         if (!users.isEmpty()) {
