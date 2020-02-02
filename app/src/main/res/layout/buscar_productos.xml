@@ -24,7 +24,7 @@
         </SearchView>
     </LinearLayout>
     <RelativeLayout
-        android:background="@drawable/fondo_no_result"
+        android:background="@drawable/back"
         android:id="@+id/iconBuscar"
         android:visibility="visible"
         android:gravity="center_horizontal"

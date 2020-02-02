@@ -79,7 +79,7 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.View
 
         @BindView(R.id.imgProducto)
         ImageView imgProducto;
-        @BindView(R.id.precioProducto) TextView precioProducto;
+        //@BindView(R.id.precioProducto) TextView precioProducto;
         @BindView(R.id.marcaProducto)TextView marca;
         @BindView(R.id.idProducto) TextView codigoBarra;
         @BindView(R.id.descripcionProducto) TextView descripcionProducto;
