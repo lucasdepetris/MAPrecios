@@ -5,9 +5,10 @@
     android:background="@color/white">
 
     <LinearLayout
+        android:alpha="0.7"
         android:orientation="vertical"
         android:gravity="center_vertical"
-        android:background="@color/primary_dark"
+        android:background="@color/md_red_A700"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
