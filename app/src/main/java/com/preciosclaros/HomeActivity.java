@@ -94,7 +94,7 @@ public class HomeActivity extends AppCompatActivity
         editor.commit();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        toolbar.setTitle(R.string.app_name);
+        //toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.my_drawer_layout);
 

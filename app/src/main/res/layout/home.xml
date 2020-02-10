@@ -3,7 +3,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="fill_parent" android:layout_height="fill_parent"
-        android:background="@drawable/splash"
+        android:background="@drawable/back"
         android:weightSum="1">
         <LinearLayout
             android:weightSum="1"
@@ -13,6 +13,12 @@
             android:layout_width="match_parent"
             android:layout_height="0dp">
 
+            <ImageView
+                android:paddingBottom="40dp"
+                android:src="@drawable/logo"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     <LinearLayout
         android:layout_weight="0.6"
@@ -31,14 +37,14 @@
 
 
             <Button
-                android:drawableTint="@color/md_orange_700"
+                android:drawableStart="@drawable/icon_scan"
                 android:drawableLeft="@drawable/icon_scan"
                 android:layout_weight="0.7"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:paddingLeft="5dp"
+                android:paddingLeft="15dp"
                 android:paddingRight="40dp"
-                android:background="@color/white"
+                android:background="@drawable/btn_buscar_prod"
                 android:id="@+id/escanear"
                 android:text="@string/escanear"
                 android:textColor="@color/md_orange_700"
@@ -57,14 +63,14 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:drawableTint="@color/md_orange_700"
+                android:drawableStart="@drawable/ic_search_white_48dp"
                 android:drawableLeft="@drawable/ic_search_white_48dp"
                 android:layout_weight="0.7"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:paddingLeft="5dp"
+                android:paddingLeft="15dp"
                 android:paddingRight="40dp"
-                android:background="@color/white"
+                android:background="@drawable/btn_buscar_prod"
                 android:id="@+id/buscar"
                 android:text="@string/buscar"
                 android:textColor="@color/md_orange_700"
