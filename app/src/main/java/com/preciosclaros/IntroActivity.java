@@ -49,23 +49,38 @@ public class IntroActivity extends AppIntro {
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);
         // Do something when users tap on Skip button.
-        Intent mainIntent = new Intent(IntroActivity.this,HomeActivity.class);
-        IntroActivity.this.startActivity(mainIntent);
+        if(!this.isHomeVisible()){
+            Intent mainIntent = new Intent(IntroActivity.this,HomeActivity.class);
+            IntroActivity.this.startActivity(mainIntent);
+        }
         IntroActivity.this.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
         // Do something when users tap on Done button.
-        Intent mainIntent = new Intent(IntroActivity.this,HomeActivity.class);
-        IntroActivity.this.startActivity(mainIntent);
+        if(!this.isHomeVisible()){
+            Intent mainIntent = new Intent(IntroActivity.this,HomeActivity.class);
+            IntroActivity.this.startActivity(mainIntent);
+        }
         IntroActivity.this.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     @Override
     public void onSlideChanged(@Nullable Fragment oldFragment, @Nullable Fragment newFragment) {
         super.onSlideChanged(oldFragment, newFragment);
         // Do something when the slide changes.
+    }
+
+    public boolean isHomeVisible(){
+        Intent intent = getIntent();
+        String actividad = intent.getStringExtra("actividad");
+        if(actividad.equalsIgnoreCase("home")){
+            return true;
+        }
+        return false;
     }
 }

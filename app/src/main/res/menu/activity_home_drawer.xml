@@ -12,6 +12,10 @@
             android:id="@+id/nav_close"
             android:icon="@drawable/ic_power_settings_new_black_48dp"
             android:title="Cerrar Sesion" />
+        <item
+            android:id="@+id/nav_tuto"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Tutorial" />
     </group>
 
 

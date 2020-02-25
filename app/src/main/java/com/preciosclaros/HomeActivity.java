@@ -151,7 +151,18 @@ public class HomeActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             //activityA.finish();
-            super.onBackPressed();
+            MapreciosUtils.showAlert(HomeActivity.this, "¿ Deseas salir ?",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                        }
+                    }, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
         }
     }
     @Override
@@ -198,6 +209,14 @@ public class HomeActivity extends AppCompatActivity
                 editor.commit();
                 //HomeActivity.super.onBackPressed();
                 finish();
+                break;
+            case R.id.nav_tuto:
+                Intent mainIntent = new Intent(HomeActivity.this,IntroActivity.class);
+                mainIntent.putExtra("actividad", "home");
+                HomeActivity.this.startActivity(mainIntent);
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                //HomeActivity.this.finish();
+                break;
 
         }
         //replacing the fragment
