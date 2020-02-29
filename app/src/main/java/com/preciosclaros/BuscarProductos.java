@@ -127,9 +127,9 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
                 sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
                 // get editor to edit in file
                 editor = sharedPreferences.edit();
-                editor.putString("ubicacion",place.getAddress().toString());
-                editor.putString("Lat", String.valueOf(place.getLatLng().latitude));
-                editor.putString("Longitude", String.valueOf(place.getLatLng().longitude));
+                editor.putString(Constants.UBICACION,place.getAddress().toString());
+                editor.putString(Constants.LATITUD, String.valueOf(place.getLatLng().latitude));
+                editor.putString(Constants.LONGITUD, String.valueOf(place.getLatLng().longitude));
                 editor.apply();
                 editor.commit();
             }
@@ -163,9 +163,9 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
 
         double lati, lng;
         sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
-        if (sharedPreferences.contains("Lat") && !sharedPreferences.getString("Lat","").equalsIgnoreCase("vacio") ) {
-            lati = Double.parseDouble(sharedPreferences.getString("Lat", ""));
-            lng = Double.parseDouble(sharedPreferences.getString("Longitude", ""));
+        if (sharedPreferences.contains(Constants.LATITUD) && !sharedPreferences.getString(Constants.LATITUD,"").equalsIgnoreCase("vacio") ) {
+            lati = Double.parseDouble(sharedPreferences.getString(Constants.LATITUD, ""));
+            lng = Double.parseDouble(sharedPreferences.getString(Constants.LONGITUD, ""));
             HttpService.getInstance().BuscarProductos(nombre,lati,lng,100, new HttpService.CustomCallListener<ProductosApi>() {
                 @Override
                 public void getResult(ProductosApi object) {

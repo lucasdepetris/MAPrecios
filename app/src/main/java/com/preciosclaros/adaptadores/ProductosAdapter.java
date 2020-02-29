@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.preciosclaros.Constants;
 import com.preciosclaros.VerProductoPorId;
 import com.preciosclaros.modelo.Producto;
 import com.preciosclaros.R;
@@ -56,15 +57,15 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.View
         holder.descripcionProducto.setText(producto.getNombre());
         holder.marca.setText(producto.getMarca());
         holder.codigoBarra.setText(producto.getId());
-        Picasso.with(holder.imgProducto.getContext()).load("https://imagenes.preciosclaros.gob.ar/productos/"+producto.getId()+".jpg")
+        Picasso.with(holder.imgProducto.getContext()).load(Constants.SERVER_IMAGENES_PRODUCTOS+producto.getId()+".jpg")
                 .placeholder(R.drawable.img_not_available).error(R.drawable.img_not_available).into(holder.imgProducto);
        holder.contenedor.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                Intent intent = new Intent(context, VerProductoPorId.class);
                intent.setFlags(intent.FLAG_ACTIVITY_SINGLE_TOP);
-               intent.putExtra("actividad","buscarproductos");
-               intent.putExtra("idProducto",producto.getId());
+               intent.putExtra(Constants.ACTIVITY,Constants.BUSCAR_PRODUCTOS_ACTIVITY);
+               intent.putExtra(Constants.ID_PRODUCTO,producto.getId());
                Activity activity = (Activity) context;
                activity.startActivity(intent);
                //context.startActivity(intent);

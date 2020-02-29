@@ -30,7 +30,7 @@ public class Splash extends AppCompatActivity {
             @Override
             public void run() {
                 sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
-                if(!sharedPreferences.contains("firstTime"))
+                if(!sharedPreferences.contains(Constants.FIRST_TIME))
                 {
                     /* Create an Intent that will start the. */
                     Intent mainIntent = new Intent(Splash.this,IntroActivity.class);

@@ -77,8 +77,8 @@ public class IntroActivity extends AppIntro {
 
     public boolean isHomeVisible(){
         Intent intent = getIntent();
-        String actividad = intent.getStringExtra("actividad");
-        if(actividad.equalsIgnoreCase("home")){
+        String actividad = intent.getStringExtra(Constants.ACTIVITY);
+        if(actividad != null && actividad.equalsIgnoreCase(Constants.HOME_ACTIVITY)){
             return true;
         }
         return false;

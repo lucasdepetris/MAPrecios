@@ -37,7 +37,7 @@ public class HttpService {
         requestProductos.enqueue(new Callback<ProductosApi>() {
             @Override
             public void onResponse(Call<ProductosApi> call, retrofit2.Response<ProductosApi> response) {
-                if (response.isSuccessful() && response.body().getErrorMessage() == null) {
+                if (response.isSuccessful() && response.body().getErrorMessage() == null && response.body().getErrorDescription() == null) {
                     ProductosApi received = response.body();
                     listener.getResult(received);
                 } else {

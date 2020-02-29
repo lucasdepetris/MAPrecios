@@ -100,9 +100,9 @@ public class VerProductoPorId extends AppCompatActivity {
         setContentView(R.layout.producto_por_codigo);
         ButterKnife.bind(this);
         Intent intent = getIntent();
-        actividad = intent.getStringExtra("actividad");
-        idProducto = intent.getStringExtra("idProducto");
-        buscarProducto(intent.getStringExtra("idProducto"));
+        actividad = intent.getStringExtra(Constants.ACTIVITY);
+        idProducto = intent.getStringExtra(Constants.ID_PRODUCTO);
+        buscarProducto(intent.getStringExtra(Constants.ID_PRODUCTO));
         //cargarSelect();
     }
 
@@ -182,9 +182,9 @@ public class VerProductoPorId extends AppCompatActivity {
 
         double lati, lng;
         sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
-        if (sharedPreferences.contains("Lat")) {
-            lati = Double.parseDouble(sharedPreferences.getString("Lat", ""));
-            lng = Double.parseDouble(sharedPreferences.getString("Longitude", ""));
+        if (sharedPreferences.contains(Constants.LATITUD)) {
+            lati = Double.parseDouble(sharedPreferences.getString(Constants.LATITUD, ""));
+            lng = Double.parseDouble(sharedPreferences.getString(Constants.LONGITUD, ""));
             HttpService.getInstance().GetProductoByID(codigo, lati, lng, 100, new HttpService.CustomCallListener<retrofit2.Response<Response>>() {
                 @Override
                 public void getResult(retrofit2.Response<Response> response) {
@@ -192,7 +192,7 @@ public class VerProductoPorId extends AppCompatActivity {
                         Producto received = response.body().getProducto();
                         if (response.body().getProductos() == null) {
 
-                            if (actividad.equalsIgnoreCase("barcode")) {
+                            if (actividad.equalsIgnoreCase(Constants.BARCODE_ACTIVITY)) {
                                 menuOcultar = true;
                                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                                 imgError.setImageResource(R.drawable.carrito_triste);
@@ -217,7 +217,7 @@ public class VerProductoPorId extends AppCompatActivity {
                                 }
                             });
                             mejorProducto = received;
-                            Picasso.with(context).load("https://imagenes.preciosclaros.gob.ar/productos/" + codigo + ".jpg")
+                            Picasso.with(context).load(Constants.SERVER_IMAGENES_PRODUCTOS + codigo + ".jpg")
                                     .placeholder(R.drawable.image_placeholder)
                                     .error(R.drawable.no_image_aivalable)
                                     .into(imgProducto);
@@ -261,7 +261,7 @@ public class VerProductoPorId extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (actividad.equalsIgnoreCase("barcode")) {
+        if (actividad.equalsIgnoreCase(Constants.BARCODE_ACTIVITY)) {
             HomeActivity.backVerProducto = true;
         }
         super.onBackPressed();

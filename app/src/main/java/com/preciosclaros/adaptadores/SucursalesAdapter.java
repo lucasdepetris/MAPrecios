@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.preciosclaros.Constants;
 import com.preciosclaros.R;
 import com.preciosclaros.modelo.Sucursales;
 import com.squareup.picasso.MemoryPolicy;
@@ -79,7 +80,7 @@ public class SucursalesAdapter extends RecyclerView.Adapter<SucursalesAdapter.Vi
             holder.precio.setText("$"+precio);
         }
         holder.localidad.setText(sucursal.getLocalidad());
-        Picasso.with(holder.imgComercio.getContext()).load("https://imagenes.preciosclaros.gob.ar/comercios/"+sucursal.getComercioId()+"-"+sucursal.getBanderaId()+".jpg")
+        Picasso.with(holder.imgComercio.getContext()).load(Constants.SERVER_IMAGENES_COMERCIOS +sucursal.getComercioId()+"-"+sucursal.getBanderaId()+".jpg")
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .placeholder(R.drawable.img_not_available)
                 .error(R.drawable.img_not_available)

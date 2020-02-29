@@ -20,6 +20,33 @@ public class ProductosApi {
     private int totalPagina;
     ArrayList<Producto> productos = new ArrayList<Producto>();
     private String errorMessage;
+    private String errorDescription;
+    private String errorType;
+    private Integer errorCode;
+
+    public String getErrorType() {
+        return errorType;
+    }
+
+    public void setErrorType(String errorType) {
+        this.errorType = errorType;
+    }
+
+    public Integer getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(Integer errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public String getErrorDescription() {
+        return errorDescription;
+    }
+
+    public void setErrorDescription(String errorDescription) {
+        this.errorDescription = errorDescription;
+    }
 
     public int getStatus() {
         return status;

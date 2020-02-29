@@ -89,7 +89,7 @@ public class HomeActivity extends AppCompatActivity
         sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
         // get editor to edit in file
         editor = sharedPreferences.edit();
-        editor.putBoolean("firstTime",false);
+        editor.putBoolean(Constants.FIRST_TIME,false);
         editor.apply();
         editor.commit();
 
@@ -107,9 +107,9 @@ public class HomeActivity extends AppCompatActivity
         ubicacion = navigationView.getMenu().findItem(R.id.ubicacionActual);
         ubicacion.setCheckable(false);
         sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
-        if(sharedPreferences.contains("ubicacion"))
+        if(sharedPreferences.contains(Constants.UBICACION))
         {
-            ubicacion.setTitle(sharedPreferences.getString("ubicacion",""));
+            ubicacion.setTitle(sharedPreferences.getString(Constants.UBICACION,""));
         }
         mGoogleApiClient = new GoogleApiClient
                 .Builder(this)
@@ -212,7 +212,7 @@ public class HomeActivity extends AppCompatActivity
                 break;
             case R.id.nav_tuto:
                 Intent mainIntent = new Intent(HomeActivity.this,IntroActivity.class);
-                mainIntent.putExtra("actividad", "home");
+                mainIntent.putExtra(Constants.ACTIVITY, Constants.HOME_ACTIVITY);
                 HomeActivity.this.startActivity(mainIntent);
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 //HomeActivity.this.finish();
@@ -239,8 +239,8 @@ public class HomeActivity extends AppCompatActivity
                                                     //if qr contains data
                                                      Intent intent = new Intent(HomeActivity.this, VerProductoPorId.class);
                                                      intent.setFlags(intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                                     intent.putExtra("actividad", "barcode");
-                                                     intent.putExtra("idProducto", result.getContents());
+                                                     intent.putExtra(Constants.ACTIVITY, Constants.BARCODE_ACTIVITY);
+                                                     intent.putExtra(Constants.ID_PRODUCTO, result.getContents());
                                                      startActivity(intent);
                                                      overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                                                     //buscarProducto(result.getContents());
@@ -255,9 +255,9 @@ public class HomeActivity extends AppCompatActivity
                     editor = sharedPreferences.edit();
                     HomeActivity.ubicacion.setTitle(place.getAddress());
                     HomeActivity.ubicacion.setCheckable(false);
-                    editor.putString("ubicacion",place.getAddress().toString());
-                    editor.putString("Lat", String.valueOf(place.getLatLng().latitude));
-                    editor.putString("Longitude", String.valueOf(place.getLatLng().longitude));
+                    editor.putString(Constants.UBICACION,place.getAddress().toString());
+                    editor.putString(Constants.LATITUD, String.valueOf(place.getLatLng().latitude));
+                    editor.putString(Constants.LONGITUD, String.valueOf(place.getLatLng().longitude));
                     editor.apply();
                     editor.commit();
                     }
@@ -270,9 +270,9 @@ public class HomeActivity extends AppCompatActivity
                 editor = sharedPreferences.edit();
                 HomeActivity.ubicacion.setTitle(place.getAddress());
                 HomeActivity.ubicacion.setCheckable(false);
-                editor.putString("ubicacion",place.getAddress().toString());
-                editor.putString("Lat", String.valueOf(place.getLatLng().latitude));
-                editor.putString("Longitude", String.valueOf(place.getLatLng().longitude));
+                editor.putString(Constants.UBICACION,place.getAddress().toString());
+                editor.putString(Constants.LATITUD, String.valueOf(place.getLatLng().latitude));
+                editor.putString(Constants.LONGITUD, String.valueOf(place.getLatLng().longitude));
                 editor.apply();
                 editor.commit();
                 escanear();

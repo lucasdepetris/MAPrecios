@@ -6,13 +6,15 @@ import com.google.gson.Gson;
 
 
 public class PreferencesManager {
-    private static final String PREFERENCES_NAME = "pref_aa_2000_";
+    private static final String PREFERENCES_NAME = "pref_maprecios";
     private static final String KEY_TOKEN = "KEY_TOKEN";
     private static final String KEY_USER = "KEY_USER";
     private static final String KEY_SYNCHRONIZED  = "KEY_SYNCHRONIZED";
     private static final String KEY_UUID = "KEY_UUID";
     private static final String KEY_AIRPORT = "KEY_AIRPORT";
     private static final String KEY_SCREEN_MOBILE = "KEY_SCREEN_MOBILE";
+    private static final String KEY_FIRST_TIME = "firstTime";
+
 
     private static void removeValue(Context context, String key){
         getSharedPrefrences(context).edit().remove(key).commit();
@@ -86,6 +88,14 @@ public class PreferencesManager {
 
     public static void saveToken(Context context, String token){
         saveStringInPreferences(context, KEY_TOKEN, token);
+    }
+
+    public static Boolean getFirstTime(Context context,Boolean valueToReturn){
+        return getBooleanFromPreferences(context, KEY_FIRST_TIME,valueToReturn);
+    }
+
+    public static void saveFirstTime(Context context, Boolean valueToSave){
+        saveBooleanInPreferences(context, KEY_FIRST_TIME, valueToSave);
     }
 
 
