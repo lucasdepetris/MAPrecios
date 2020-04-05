@@ -84,6 +84,9 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         setContentView(R.layout.buscar_productos);
         ButterKnife.bind(this);
         buscador.setIconifiedByDefault(false);
@@ -148,6 +151,10 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
         switch (item.getItemId()){
             case R.id.action_favorite:
                 cambiarUbicacion();
+                break;
+            case android.R.id.home:
+                finish();
+                //return true;
                 break;
         }
         return true;

@@ -3,7 +3,7 @@ package com.preciosclaros;
 public interface Constants {
     public static final String SERVER = "http://192.168.0.100/bs.dev/nrum";
     public static final String SERVER_IMAGENES_PRODUCTOS = "https://imagenes.preciosclaros.gob.ar/productos/";
-    public static final String SERVER_IMAGENES_COMERCIOS = "https://imagenes.preciosclaros.gob.ar/productos/";
+    public static final String SERVER_IMAGENES_COMERCIOS = "https://imagenes.preciosclaros.gob.ar/comercios/";
 
     public static final String IMG_JPG = ".jpg";
 

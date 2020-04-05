@@ -211,7 +211,7 @@ public class HomeActivity extends AppCompatActivity
                 finish();
                 break;
             case R.id.nav_tuto:
-                Intent mainIntent = new Intent(HomeActivity.this,IntroActivity.class);
+                Intent mainIntent = new Intent(HomeActivity.this,TutorialActivity.class);
                 mainIntent.putExtra(Constants.ACTIVITY, Constants.HOME_ACTIVITY);
                 HomeActivity.this.startActivity(mainIntent);
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);

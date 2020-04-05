@@ -24,9 +24,10 @@ public class IntroActivity extends AppIntro {
         // Instead of fragments, you can also use our default slide
         // Just set a title, description, background and image. AppIntro will do the rest.
 
-        addSlide(AppIntroFragment.newInstance("Busca Productos", "Busca un producto mediante su nombre o escaneando su codigo de barra.",R.drawable.buscar_product, getResources().getColor(R.color.grayBackground)));
-        addSlide(AppIntroFragment.newInstance("Ahorra Dinero", "Elegi el mejor precio segun tus prioridades!",R.drawable.save_money_intro, getResources().getColor(R.color.grayBackground)));
-        addSlide(AppIntroFragment.newInstance("Ubicación", "Busca los productos cercanos al punto que elijas.",R.drawable.gps_intro_circle, getResources().getColor(R.color.grayBackground)));
+        //addSlide(AppIntro newInstance(R.layout.tutorial_step_one));
+        addSlide(AppIntroFragment.newInstance("Buscá tu producto", "Busca un producto mediante su nombre o escaneando su codigo de barra.",R.drawable.tuto1, getResources().getColor(R.color.md_red_600)));
+        addSlide(AppIntroFragment.newInstance("Ahorrá", "Elegí el precio que mas te convenga",R.drawable.tuto2, getResources().getColor(R.color.md_red_600)));
+        addSlide(AppIntroFragment.newInstance("Ubicación", "Te mostramos los puntos más cercanos donde comprar el producto que elegiste",R.drawable.tuto3, getResources().getColor(R.color.md_red_600)));
         //addSlide(SampleSlide.newInstance(R.layout.buscar_productos));
 
         // OPTIONAL METHODS

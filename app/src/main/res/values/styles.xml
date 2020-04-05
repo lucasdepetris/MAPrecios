@@ -29,4 +29,7 @@
         <item name="colorControlNormal">@color/colorSecondary</item>
         <item name="colorControlActivated">@color/colorSecondary</item>
     </style>
+    <style name="AppTheme.WhiteAccent">
+        <item name="colorAccent">@color/white</item> <!-- Whatever color you want-->
+    </style>
 </resources>

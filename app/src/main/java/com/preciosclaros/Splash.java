@@ -33,7 +33,7 @@ public class Splash extends AppCompatActivity {
                 if(!sharedPreferences.contains(Constants.FIRST_TIME))
                 {
                     /* Create an Intent that will start the. */
-                    Intent mainIntent = new Intent(Splash.this,IntroActivity.class);
+                    Intent mainIntent = new Intent(Splash.this,TutorialActivity.class);
                     Splash.this.startActivity(mainIntent);
                     overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                     Splash.this.finish();
