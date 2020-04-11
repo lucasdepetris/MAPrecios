@@ -151,7 +151,7 @@ public class HomeActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             //activityA.finish();
-            MapreciosUtils.showAlert(HomeActivity.this, "¿ Deseas salir ?",
+            MapreciosUtils.showAlert(HomeActivity.this, "¿ Deseas salir ?","Cancelar","Salir",
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -208,7 +208,18 @@ public class HomeActivity extends AppCompatActivity
                 editor.clear();
                 editor.commit();
                 //HomeActivity.super.onBackPressed();
-                finish();
+                MapreciosUtils.showAlert(HomeActivity.this, "¿ Deseas cerrar sesión ?","Cancelar","Si",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                            }
+                        }, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
                 break;
             case R.id.nav_tuto:
                 Intent mainIntent = new Intent(HomeActivity.this,TutorialActivity.class);

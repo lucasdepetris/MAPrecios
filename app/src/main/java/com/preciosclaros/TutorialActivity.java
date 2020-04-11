@@ -25,7 +25,8 @@ public class TutorialActivity extends AppCompatActivity {
     @OnClick({R.id.next}) public void nextClicked(Button btn){
         int i = getItem(+1);
         if(i == screens.length - 1){
-            next.setText("Done");
+            next.setText("Entendido");
+            skip.setVisibility(View.GONE);
         }
         if (i < screens.length) {
             vp.setCurrentItem(i);
@@ -87,10 +88,10 @@ public class TutorialActivity extends AppCompatActivity {
         public void onPageSelected(int position) {
 
             if (position == screens.length - 1) {
-                next.setText("Done");
-                //skip.setVisibility(View.GONE);
+                next.setText("Entendido");
+                skip.setVisibility(View.GONE);
             } else {
-                next.setText("Next");
+                next.setText("Siguiente");
                 skip.setVisibility(View.VISIBLE);
             }
         }

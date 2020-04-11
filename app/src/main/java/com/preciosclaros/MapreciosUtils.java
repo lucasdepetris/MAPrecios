@@ -18,7 +18,7 @@ public class MapreciosUtils {
         return instance;
     }
 
-    public static void showAlert(Context context, String mensaje, DialogInterface.OnClickListener okCb,DialogInterface.OnClickListener cancelBtn) {
+    public static void showAlert(Context context, String mensaje,String CancelTitle,String OkTitle, DialogInterface.OnClickListener okCb,DialogInterface.OnClickListener cancelBtn) {
         new AlertDialog.Builder(context)
                 .setNegativeButton("Cancelar",cancelBtn)
                 .setCancelable(false)
