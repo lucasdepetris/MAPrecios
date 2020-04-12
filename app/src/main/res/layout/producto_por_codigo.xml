@@ -13,12 +13,12 @@
             android:layout_height="match_parent">
             <ImageView
                 android:id="@+id/imgErrorVerProductoPorId"
-                android:src="@drawable/mapa_error"
+                android:src="@drawable/gps_orange_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/textMensajeErrorBuscar"
-                android:textColor="@color/md_black_1000"
+                android:textColor="@color/view_bg"
                 android:padding="40dp"
                 android:textAlignment="center"
                 android:text="@string/sinUbicacion"

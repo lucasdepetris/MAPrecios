@@ -184,7 +184,7 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
                                 findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
                                 TextView msg = (TextView) findViewById(R.id.textMensajeErrorBuscar);
                                 ImageView img = (ImageView) findViewById(R.id.imgMsgError);
-                                img.setImageResource(R.drawable.lupa_error);
+                                img.setImageResource(R.drawable.error_image);
                                 msg.setText(R.string.sinCoincidencias);
                             }
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -204,7 +204,7 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
                         findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
                         TextView msg = (TextView) findViewById(R.id.textMensajeErrorBuscar);
                         ImageView img = (ImageView) findViewById(R.id.imgMsgError);
-                        img.setImageResource(R.drawable.carrito_triste);
+                        img.setImageResource(R.drawable.error_image);
                         msg.setText(R.string.problemaConServidor);
                     }
                 }

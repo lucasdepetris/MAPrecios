@@ -51,7 +51,7 @@
     <RelativeLayout
         android:visibility="gone"
         android:gravity="center_horizontal"
-        android:background="@drawable/fondo_no_result"
+        android:background="@drawable/back"
         android:id="@+id/msgErrorUbicacion"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/imgMsgError"
-                android:src="@drawable/mapa_error"
+                android:src="@drawable/gps_orange_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -71,7 +71,7 @@
             android:id="@+id/textMensajeErrorBuscar"
             android:layout_gravity="center_horizontal"
             android:layout_below="@+id/msgErrorCarrito"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/white"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
             android:paddingTop="10dp"

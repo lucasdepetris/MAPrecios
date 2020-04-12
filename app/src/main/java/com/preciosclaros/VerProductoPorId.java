@@ -31,6 +31,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -121,9 +122,11 @@ public class VerProductoPorId extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (!menuOcultar) {
             switch (item.getItemId()) {
                 case R.id.filter:
+                    if (menuOcultar){
+                        break;
+                    }
                     CharSequence colors[] = new CharSequence[]{"Ordenar Por Precio", "Ordenar Por Cercania"};
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     builder.setTitle("Filtrar");
@@ -174,7 +177,6 @@ public class VerProductoPorId extends AppCompatActivity {
                     //return true;
                     break;
             }
-        }
         return true;
     }
 
@@ -195,13 +197,13 @@ public class VerProductoPorId extends AppCompatActivity {
                             if (actividad.equalsIgnoreCase(Constants.BARCODE_ACTIVITY)) {
                                 menuOcultar = true;
                                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                                imgError.setImageResource(R.drawable.carrito_triste);
+                                imgError.setImageResource(R.drawable.error_image);
                                 msgError.setText(R.string.productoSinPrecio);
                                 findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
                             } else {
                                 menuOcultar = true;
                                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                                imgError.setImageResource(R.drawable.carrito_triste);
+                                imgError.setImageResource(R.drawable.error_image);
                                 msgError.setText(R.string.productoSinPrecio);
                                 findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
                             }
@@ -218,8 +220,8 @@ public class VerProductoPorId extends AppCompatActivity {
                             });
                             mejorProducto = received;
                             Picasso.with(context).load(Constants.SERVER_IMAGENES_PRODUCTOS + codigo + ".jpg")
-                                    .placeholder(R.drawable.image_placeholder)
-                                    .error(R.drawable.no_image_aivalable)
+                                    .placeholder(R.drawable.img_not_available)
+                                    .error(R.drawable.img_not_available)
                                     .into(imgProducto);
                             String mejorPrecio = response.body().getProductos().get(0).getPreciosProducto().getPrecioLista();
                             int i = 0;
@@ -230,13 +232,16 @@ public class VerProductoPorId extends AppCompatActivity {
                             precioProducto.setText("$" + mejorPrecio);
                             nombreProducto.setText(received.getNombre());
                             ArrayList<Sucursales> sucursales = response.body().getProductos();
-                            //mejorSucursal = response.body().getMejorPrecio();
+                            Iterator<Sucursales> iter = sucursales.iterator();
+                            while (iter.hasNext()) {
+                                Sucursales p = iter.next();
+                                if (p.getPreciosProducto().getPrecioLista()==null || p.getPreciosProducto().getPrecioLista().equalsIgnoreCase("")) iter.remove();
+                            }
                             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
                             recyclerView.setLayoutManager(linearLayoutManager);
 
                             if (!sucursales.isEmpty()) {
                                 SucursalesAdapter adapter = new SucursalesAdapter(sucursales, context, mejorSucursal);
-                                // lista =(ListView) findViewById(R.id.listaProductoSucursales);
                                 recyclerView.setAdapter(adapter);
                                 Log.i(TAG, "Artículo descargado: ");
                             }
@@ -244,7 +249,7 @@ public class VerProductoPorId extends AppCompatActivity {
                     } else {
                         menuOcultar = true;
                         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                        imgError.setImageResource(R.drawable.carrito_triste);
+                        imgError.setImageResource(R.drawable.error_image);
                         msgError.setText(R.string.problemaConServidor);
                         findViewById(R.id.msgErrorUbicacion).setVisibility(View.VISIBLE);
                     }
