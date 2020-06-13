@@ -68,7 +68,7 @@ public class HomeActivity extends AppCompatActivity
                 }
                 else
                 {
-                 Toast.makeText(this,"Debe elegir una ubicacion antes de buscar",Toast.LENGTH_LONG).show();
+                 Toast.makeText(this,"Debe elegir una ubicación antes de buscar",Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.buscar:

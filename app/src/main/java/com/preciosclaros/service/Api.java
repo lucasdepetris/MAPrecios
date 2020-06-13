@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Api {
     private static Api instance = null;
     public static final String BASE_URL = "https://d3e6htiiul5ek9.cloudfront.net/prod/";
-    private final static Integer TIMEOUT = 90000;
+    private final static Integer TIMEOUT = 30;
     private final static Integer MAX_RETRIES = 3;
     // Keep your services here, build them in buildRetrofit method later
     private ApiPrecios apiService;
