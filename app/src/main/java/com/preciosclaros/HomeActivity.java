@@ -1,12 +1,18 @@
 package com.preciosclaros;
 
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
@@ -17,6 +23,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,45 +58,109 @@ public class HomeActivity extends AppCompatActivity
     SharedPreferences.Editor editor;
     private IntentIntegrator qrScan;
     private boolean scan = false;
-    static  boolean backVerProducto;
+    static boolean backVerProducto;
     GoogleApiClient mGoogleApiClient;
-    private  boolean mapaShow;
-    @OnClick({R.id.escanear, R.id.buscar}) public void elejirOpcion(Button btn){
-        switch (btn.getId()){
+    private boolean mapaShow;
+    // The minimum distance to change Updates in meters
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1; // 10 meters
+
+    // The minimum time between updates in milliseconds
+    private static final long MIN_TIME_BW_UPDATES = 1; // 1 minute
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
+    // Declaring a Location Manager
+    protected LocationManager locationManager;
+
+    @OnClick({R.id.escanear, R.id.buscar})
+    public void elejirOpcion(Button btn) {
+        switch (btn.getId()) {
             case R.id.escanear:
                 sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
-                if(!sharedPreferences.contains("Lat"))
-                {
+                if (!sharedPreferences.contains("Lat")) {
                     elegirUbicacion(2);
                 }
-                if(sharedPreferences.contains("Lat"))
-                {
+                if (sharedPreferences.contains("Lat")) {
                     escanear();
-                }
-                else
-                {
-                 Toast.makeText(this,"Debe elegir una ubicación antes de buscar",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, "Debe elegir una ubicación antes de buscar", Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.buscar:
-                Intent intent3 = new Intent(HomeActivity.this,BuscarProductos.class);
+                Intent intent3 = new Intent(HomeActivity.this, BuscarProductos.class);
                 intent3.setFlags(intent3.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent3);
-                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
         }
     }
-    static MenuItem us,ubicacion;
+
+    static MenuItem us, ubicacion;
+    private final android.location.LocationListener mLocationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(final Location location) {
+            //your code here
+        }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String s) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String s) {
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            ActivityCompat.requestPermissions(HomeActivity.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_LOCATION);
+
+        } else {
+
+            System.out.println("Location permissions available, starting location");
+
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES,
+                    MIN_DISTANCE_CHANGE_FOR_UPDATES, mLocationListener);
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            if(location != null){
+                Log.d("LOCATION", String.valueOf(locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER).getLatitude()));
+                sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
+                // get editor to edit in file
+                editor = sharedPreferences.edit();
+                editor.putString(Constants.LATITUD, String.valueOf(locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER).getLatitude()));
+                editor.putString(Constants.LONGITUD, String.valueOf(locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER).getLongitude()));
+                editor.apply();
+                editor.commit();
+            }
+
+        }
+
 
         sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
         // get editor to edit in file
         editor = sharedPreferences.edit();
-        editor.putBoolean(Constants.FIRST_TIME,false);
+        editor.putBoolean(Constants.FIRST_TIME, false);
         editor.apply();
         editor.commit();
 
@@ -105,11 +176,11 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         ubicacion = navigationView.getMenu().findItem(R.id.ubicacionActual);
+        ubicacion.setVisible(false);
         ubicacion.setCheckable(false);
         sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
-        if(sharedPreferences.contains(Constants.UBICACION))
-        {
-            ubicacion.setTitle(sharedPreferences.getString(Constants.UBICACION,""));
+        if (sharedPreferences.contains(Constants.UBICACION)) {
+            ubicacion.setTitle(sharedPreferences.getString(Constants.UBICACION, ""));
         }
         mGoogleApiClient = new GoogleApiClient
                 .Builder(this)
@@ -145,6 +216,47 @@ public class HomeActivity extends AppCompatActivity
     }
 
     @Override
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
+
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+
+                System.out.println("Location permissions available, starting location");
+
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES,
+                        MIN_DISTANCE_CHANGE_FOR_UPDATES, mLocationListener);
+                Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                if(location != null){
+                    Log.d("LOCATION", String.valueOf(locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER).getLatitude()));
+                    sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
+                    // get editor to edit in file
+                    editor = sharedPreferences.edit();
+                    editor.putString(Constants.LATITUD, String.valueOf(locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER).getLatitude()));
+                    editor.putString(Constants.LONGITUD, String.valueOf(locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER).getLongitude()));
+                    editor.apply();
+                    editor.commit();
+                }
+
+            }
+
+        }
+
+    }
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.my_drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -168,7 +280,7 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.mapa, menu);
+        //getMenuInflater().inflate(R.menu.mapa, menu);
         return super.onCreateOptionsMenu(menu);
     }
     @Override

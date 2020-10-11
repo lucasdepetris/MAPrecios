@@ -110,7 +110,7 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
                 .build();
         int PLACE_PICKER_REQUEST = 1;
         sharedPreferences = getApplicationContext().getSharedPreferences("Reg", 0);
-        if(!sharedPreferences.contains("Lat")) {
+        /*if(!sharedPreferences.contains("Lat")) {
             PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
             try {
                 startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
@@ -119,7 +119,7 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
             } catch (GooglePlayServicesNotAvailableException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
@@ -142,7 +142,7 @@ public class BuscarProductos extends AppCompatActivity implements GoogleApiClien
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.mapa, menu);
+        //getMenuInflater().inflate(R.menu.mapa, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

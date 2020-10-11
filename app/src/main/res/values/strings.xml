@@ -34,7 +34,7 @@
     <string name="misListas">Mis Listas</string>
     <string name="escanear">Escanear</string>
     <string name="buscar">Buscar</string>
-    <string name="sinUbicacion">No se ha podido obtener su ubicación, intente nuevamente eligiendo una ubicación</string>
+    <string name="sinUbicacion">No se ha podido obtener su ubicación, nos debe otorgar el permiso de acceder a su ubicacíon para el correcto funcionamiento.</string>
     <string-array name="media_names">
         <item>Big Buck Bunny</item>
         <item>Elephants Dream</item>
